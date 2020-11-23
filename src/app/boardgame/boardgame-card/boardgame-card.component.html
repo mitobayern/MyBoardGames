@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-immage-wrapper">
+    <img class="boardGameImage" src="assets/images/BrassBirmingham.jpg" />
+    <ul class="list-inline text-center imgage-icons animate">
+      <li class="list-inline-item">
+        <button class="btn btn-primary"><i class="far fa-edit"></i></button>
+      </li>
+      <li class="list-inline-item">
+        <button class="btn btn-primary"><i class="fab fa-youtube"></i></button>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body p-2">
+    <h4 class="boardGameTitle">{{ boardGame.Title }}</h4>
+    <h5>Publisher: {{ boardGame.Publisher }}</h5>
+    <h5>Designer: {{ boardGame.Designer }}</h5>
+    <h6>Players: {{ boardGame.MinPlayers }} - {{ boardGame.MaxPlayers }}</h6>
+    <h6>
+      Playing time: {{ boardGame.MinPlayingTime }} -
+      {{ boardGame.MaxPlayingTime }} Min
+    </h6>
+    <h6>Rating: {{ boardGame.Rating }}</h6>
+  </div>
+</div>

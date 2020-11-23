@@ -1,0 +1,45 @@
+.boardGameImage {
+  width: 100%;
+}
+
+.boardGameTitle {
+  color: blue;
+  font-style: italic;
+}
+
+.card-immage-wrapper:hover img {
+  transform: scale(1.1, 1.1);
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+  opacity: 0.6;
+}
+
+.card-immage-wrapper img {
+  transform: scale(1, 1);
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+}
+
+.card-immage-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.imgage-icons {
+  position: absolute;
+  bottom: -10%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+}
+
+.card-immage-wrapper:hover .imgage-icons {
+  bottom: 0;
+  opacity: 1;
+}
+
+.animate {
+  transition: all 0.4s ease-in-out;
+}
