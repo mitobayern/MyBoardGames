@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { IBoardGame } from '../IBoardGame.interface';
 
 @Component({
   selector: 'app-boardgame-card',
@@ -6,18 +7,8 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./boardgame-card.component.css']
 })
 export class BoardgameCardComponent implements OnInit {
-  @Input() boardGame : any
-  boardGame: any = {
-    "Id": 1,
-    "Title": "Brass: Birmingham",
-    "Publisher": "Roxley",
-    "Designer": "Martin Wallace",
-    "MinPlayers": 2,
-    "MaxPlayers": 4,
-    "MinPlayingTime": 60,
-    "MaxPlayingTime": 120,
-    "Rating": 10
-  }
+  @Input() boardGame : IBoardGame
+
   constructor() {
   }
 
