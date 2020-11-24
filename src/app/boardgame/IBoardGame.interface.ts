@@ -1,5 +1,6 @@
 export interface IBoardGame {
   Id: number;
+  OnSale: boolean,
   Title: string;
   Publisher: string,
   Designer: string,
@@ -7,6 +8,7 @@ export interface IBoardGame {
   MaxPlayers: number,
   MinPlayingTime: number,
   MaxPlayingTime: number,
-  Rating: number
+  Rating: number,
+  Image?: string,
 }
 

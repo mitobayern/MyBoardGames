@@ -23,4 +23,18 @@ export class BoardGamesService {
       })
     );
   }
+
+  getAllBoardGamesOnSale(): Observable<IBoardGame[]> {
+    return this.httpp.get('/data/boardGames.json').pipe(
+      map((data) => {
+        const boardGamesArray: Array<IBoardGame> = [];
+        for (const id in data) {
+          if (data.hasOwnProperty(id) && data[id].OnSale === true ) {
+            boardGamesArray.push(data[id]);
+          }
+        }
+        return boardGamesArray;
+      })
+    );
+  }
 }

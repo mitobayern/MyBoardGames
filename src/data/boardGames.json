@@ -1,5 +1,6 @@
 [{
   "Id": 1,
+  "OnSale":false,
   "Title": "Brass: Birmingham",
   "Publisher": "Roxley",
   "Designer": "Martin Wallace",
@@ -7,49 +8,11 @@
   "MaxPlayers": 4,
   "MinPlayingTime": 60,
   "MaxPlayingTime": 120,
-  "Rating": 10
+  "Rating": 10,
+  "Image": "BrassBirmingham"
 },{
   "Id": 2,
-  "Title": "Carcassonne",
-  "Publisher": "Hans im Glück",
-  "Designer": "Klaus-Jürgen Wrede",
-  "MinPlayers": 2,
-  "MaxPlayers": 5,
-  "MinPlayingTime": 30,
-  "MaxPlayingTime": 45,
-  "Rating": 9.9
-},{
-  "Id": 3,
-  "Title": "Everdell",
-  "Publisher": "Starling Games",
-  "Designer": "James A. Wilson",
-  "MinPlayers": 1,
-  "MaxPlayers": 4,
-  "MinPlayingTime": 40,
-  "MaxPlayingTime": 80,
-  "Rating": 9.5
-},{
-  "Id": 4,
-  "Title": "7 Wonders",
-  "Publisher": "Repos Production",
-  "Designer": "Antoine Bauza",
-  "MinPlayers": 2,
-  "MaxPlayers": 7,
-  "MinPlayingTime": 30,
-  "MaxPlayingTime": 60,
-  "Rating": 8.5
-},{
-  "Id": 5,
-  "Title": "A Game of Thrones: The Board Game",
-  "Publisher": "Fantasy Flight Games",
-  "Designer": "Christian T. Petersen",
-  "MinPlayers": 3,
-  "MaxPlayers": 6,
-  "MinPlayingTime": 120,
-  "MaxPlayingTime": 240,
-  "Rating": 9
-},{
-  "Id": 6,
+  "OnSale":true,
   "Title": "Battalia: The Creation",
   "Publisher": "Fantasmagoria",
   "Designer": "Alexandar Guerov",
@@ -57,6 +20,55 @@
   "MaxPlayers": 4,
   "MinPlayingTime": 60,
   "MaxPlayingTime": 180,
-  "Rating": 9
+  "Rating": 9,
+  "Image": "BattaliaTheCreation"
+},{
+  "Id": 3,
+  "OnSale":true,
+  "Title": "Everdell",
+  "Publisher": "Starling Games",
+  "Designer": "James A. Wilson",
+  "MinPlayers": 1,
+  "MaxPlayers": 4,
+  "MinPlayingTime": 40,
+  "MaxPlayingTime": 80,
+  "Rating": 9.5,
+  "Image": "Everdell"
+},{
+  "Id": 4,
+  "OnSale":false,
+  "Title": "7 Wonders",
+  "Publisher": "Repos Production",
+  "Designer": "Antoine Bauza",
+  "MinPlayers": 2,
+  "MaxPlayers": 7,
+  "MinPlayingTime": 30,
+  "MaxPlayingTime": 60,
+  "Rating": 8.5,
+  "Image": "7 Wonders"
+},{
+  "Id": 5,
+  "OnSale":true,
+  "Title": "A Game of Thrones: The Board Game",
+  "Publisher": "Fantasy Flight Games",
+  "Designer": "Christian T. Petersen",
+  "MinPlayers": 3,
+  "MaxPlayers": 6,
+  "MinPlayingTime": 120,
+  "MaxPlayingTime": 240,
+  "Rating": 9,
+  "Image": "AGameOfThrones"
+},{
+  "Id": 6,
+  "OnSale":false,
+  "Title": "Carcassonne",
+  "Publisher": "Hans im Glück",
+  "Designer": "Klaus-Jürgen Wrede",
+  "MinPlayers": 2,
+  "MaxPlayers": 5,
+  "MinPlayingTime": 30,
+  "MaxPlayingTime": 45,
+  "Rating": 9.9,
+  "Image": "Carcassonne"
 }
 ]
