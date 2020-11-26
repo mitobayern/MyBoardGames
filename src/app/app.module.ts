@@ -12,6 +12,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 import { BoardGamesService } from './services/boardGames.service';
 import { BoardgameSalesListComponent } from './boardgame/boardgame-sales-list/boardgame-sales-list.component';
+import { UserLoginComponent } from './user/user-login/user-login/user-login.component';
+import { UserRegisterComponent } from './user/user-register/user-register/user-register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', component: BoardgameListComponent },
@@ -20,6 +23,9 @@ const appRoutes: Routes = [
   { path: 'video-tutorials', component: AddBoardgameComponent },
   { path: 'marketplace', component: BoardgameSalesListComponent },
   { path: 'add-boardgame', component: AddBoardgameComponent },
+  { path: 'user/login', component: UserLoginComponent },
+  { path: 'user/register', component: UserRegisterComponent },
+
 ];
 
 @NgModule({
@@ -31,10 +37,13 @@ const appRoutes: Routes = [
     BoardgameListComponent,
     BoardgameSalesListComponent,
     NavBarComponent,
+    UserLoginComponent,
+    UserRegisterComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [BoardGamesService],
