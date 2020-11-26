@@ -16,6 +16,8 @@ import { UserLoginComponent } from './user/user-login/user-login/user-login.comp
 import { UserRegisterComponent } from './user/user-register/user-register/user-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
+import { AlertifyService } from './services/alertify.service';
+import { AuthenticationService } from './services/authentication.service';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', component: BoardgameListComponent },
@@ -47,7 +49,11 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [BoardGamesService, UserService],
+  providers: [
+    AlertifyService,
+    BoardGamesService,
+    UserService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
