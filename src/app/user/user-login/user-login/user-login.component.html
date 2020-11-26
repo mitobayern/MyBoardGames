@@ -16,7 +16,7 @@
 
           <div class="form-group col-12">
             <label for="name" class="form-label">Password</label>
-            <input type="text" class="form-control" formControlName="password"/>
+            <input type="password" class="form-control" formControlName="password"/>
             <span *ngIf="!password.valid && (password.touched)" class="error-block">
               Please provide password
             </span>

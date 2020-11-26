@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
+import { UserRegisterComponent } from '../user/user-register/user-register/user-register.component';
 
 @Injectable({
   providedIn: 'root',
@@ -17,5 +18,14 @@ export class UserService {
     }
     localStorage.setItem('Users', JSON.stringify(users));
   }
+
+  AuthenticateUser(user: any) {
+    let userArray = [];
+    if (localStorage.getItem('Users')) {
+      userArray = JSON.parse(localStorage.getItem('Users'));
+    }
+    return userArray.find((x) =>
+    x.userName === user.userName &&
+    x.password === user.password);
+  }
 }
- 

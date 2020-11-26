@@ -14,8 +14,7 @@ export class UserRegisterComponent implements OnInit {
   userSubmitted: boolean;
   user: User;
 
-  constructor(private userService: UserService,
-              private alertify: AlertifyService) {}
+  constructor(private userService: UserService, private alertify: AlertifyService) {}
 
   ngOnInit() {
     this.registrationForm = new FormGroup(
