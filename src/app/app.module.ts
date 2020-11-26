@@ -15,6 +15,7 @@ import { BoardgameSalesListComponent } from './boardgame/boardgame-sales-list/bo
 import { UserLoginComponent } from './user/user-login/user-login/user-login.component';
 import { UserRegisterComponent } from './user/user-register/user-register/user-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserService } from './services/user.service';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', component: BoardgameListComponent },
@@ -46,7 +47,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [BoardGamesService],
+  providers: [BoardGamesService, UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
