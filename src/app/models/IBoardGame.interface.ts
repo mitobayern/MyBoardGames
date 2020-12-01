@@ -10,5 +10,6 @@ export interface IBoardGame {
   MaxPlayingTime: number,
   Rating: number,
   Image?: string,
+  VideoUrl: string;
 }
 

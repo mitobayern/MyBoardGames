@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { IBoardGame } from '../boardgame/IBoardGame.interface';
+import { IBoardGame } from '../models/IBoardGame.interface';
 import { Observable } from 'rxjs';
+import { BoardGame } from '../models/boardGame';
 
 @Injectable({
   providedIn: 'root',
@@ -36,5 +37,9 @@ export class BoardGamesService {
         return boardGamesArray;
       })
     );
+  }
+
+  addBoardGame(boardGame: BoardGame){
+    localStorage.setItem('newBoardGame', JSON.stringify(boardGame))
   }
 }

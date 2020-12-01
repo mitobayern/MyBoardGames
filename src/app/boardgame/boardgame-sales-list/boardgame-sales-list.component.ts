@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardGamesService } from 'src/app/services/boardGames.service';
-import { IBoardGame } from '../IBoardGame.interface';
+import { IBoardGame } from '../../models/IBoardGame.interface';
 
 @Component({
   selector: 'app-boardgame-sales-list',

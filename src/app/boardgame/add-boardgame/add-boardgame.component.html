@@ -46,13 +46,14 @@
               <input type="text" class="form-control" formControlName="Designer"
                 [(ngModel)]="boardGamePreview.Designer"/>
               <div class="error-block"
-                *ngIf="Publisher.invalid && (nextClicked || Designer.touched)">
+                *ngIf="Designer.invalid && (nextClicked || Designer.touched)">
                 Please provide game Designer
               </div>
             </div>
 
             <div class="form-group col-12">
               <button type="button" class="btn btn-primary mr-2" (click)="selectTab(1, BasicInfo.valid)">Next</button>
+              <button type="button" class="btn btn-primary mr-2" (click)="onBack()">Back</button>
             </div>
           </tab>
 
@@ -128,8 +129,8 @@
             </div>
 
             <div class="form-group col-12">
-              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(0)">Previous</button>
-              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(2)">Next</button>
+              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(0, BasicInfo.valid)">Previous</button>
+              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(2, BasicInfo.valid)">Next</button>
             </div>
           </tab>
 
@@ -139,14 +140,14 @@
               <label for="video">Video Url</label>
               <input type="text" class="form-control" formControlName="VideoUrl"/>
               <div class="error-block"
-                *ngIf="Publisher.invalid && (nextClicked || Designer.touched)">
+                *ngIf="VideoUrl.invalid && (nextClicked || VideoUrl.touched)">
                 Please provide video url
               </div>
             </div>
 
             <div class="form-group col-12">
-              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(1)">Previous</button>
-              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(3)">Next</button>
+              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(1, BasicInfo.valid)">Previous</button>
+              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(3, BasicInfo.valid)">Next</button>
             </div>
           </tab>
 
@@ -161,7 +162,7 @@
             </div>
 
             <div class="form-group col-12">
-              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(2)">Previous</button>
+              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(2, BasicInfo.valid)">Previous</button>
               <button type="submit" class="btn btn-primary mr-2">Save</button>
               <button type="reset" class="btn btn-primary mr-2">Cancel</button>
             </div>

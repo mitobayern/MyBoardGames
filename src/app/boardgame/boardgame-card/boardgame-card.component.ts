@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { IBoardGame } from '../IBoardGame.interface';
+import { IBoardGame } from '../../models/IBoardGame.interface';
 
 @Component({
   selector: 'app-boardgame-card',
