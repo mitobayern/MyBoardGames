@@ -4,7 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms'
 
 
 import { AppComponent } from './app.component';
@@ -46,12 +49,15 @@ const appRoutes: Routes = [
     BoardgameSalesListComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot()
+    TabsModule.forRoot(),
+    ButtonsModule.forRoot(),
+    BsDropdownModule.forRoot(),
   ],
   providers: [
     UserService,

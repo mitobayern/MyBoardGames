@@ -1,6 +1,143 @@
-<p>
-  add-boardgame works!
-  <iframe width="420" height="345" src="https://www.youtube.com/embed/Lzxf4tfq9as">
-  </iframe>
-  <button (click)="onBack()" class="btn btn-primary">Back</button>
-</p>
+<div class="row mb-5">
+  <div class="col-8">
+<div class="card">
+  <div class="card-header">
+    <h5>Add new Boardgame</h5>
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)='onSubmit()' #Form="ngForm">
+      <div>
+        <tabset #formTabs>
+          <tab heading="Basic info" id="tab1">
+            <!-- <div class="form-group col-12">
+              <p>I want to</p>
+                <div class="btn-group" btnRadioGroup name='OnSale' [(ngModel)]="propertyView.OnSale">
+                  <label class="btn btn-outline-primary mr-2"
+                  btnRadio='true' tabindex="0" role="button" name="OnSale">Yes</label>
+                  <label class="btn btn-outline-primary"
+                  btnRadio='false' tabindex="0" role="button" name="OnSale">No</label>
+                </div>
+            </div> -->
+
+            <div class="form-group col-12">
+              <label for="title">Game Title</label>
+              <input type="text" class="form-control" ngModel name="Title" [(ngModel)]="boardGamePreview.Title"/>
+            </div>
+
+            <div class="form-group col-12">
+              <label for="publisher">Game Publisher</label>
+              <input type="text" class="form-control" ngModel name="Publisher" [(ngModel)]="boardGamePreview.Publisher"/>
+            </div>
+
+            <div class="form-group col-12">
+              <label for="esigner">Game Designer</label>
+              <input type="text" class="form-control" ngModel name="Designer" [(ngModel)]="boardGamePreview.Designer" />
+            </div>
+
+            <div class="form-group col-12">
+              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(1)">Next</button>
+            </div>
+          </tab>
+
+          <tab heading="Other details">
+            <div class="form-group col-12">
+              <p>Мinimum Players Count</p>
+                <div class="btn-group" btnRadioGroup name='MinPlayers'
+                [(ngModel)]="boardGamePreview.MinPlayers">
+                  <label
+                  *ngFor="let minPlayers of players"
+                  class="btn btn-outline-primary mr-2"
+                  [btnRadio]="minPlayers" tabindex="0" role="button"
+                  name="MinPlayers">{{minPlayers}}
+                </label>
+                </div>
+            </div>
+
+            <div class="form-group col-12">
+                <p>Maximum Players Count</p>
+                  <div class="btn-group" btnRadioGroup name='MaxPlayers'
+                  [(ngModel)]="boardGamePreview.MaxPlayers">
+                    <label
+                    *ngFor="let maxPlayers of players"
+                    class="btn btn-outline-primary mr-2"
+                    [btnRadio]="maxPlayers" tabindex="0" role="button"
+                    name="MaxPlayers">{{maxPlayers}}
+                  </label>
+                  </div>
+            </div>
+
+            <div class="form-group col-12">
+              <p>Мinimum Playing time</p>
+                <div class="btn-group" btnRadioGroup name='MinPlayingTime'
+                [(ngModel)]="boardGamePreview.MinPlayingTime">
+                  <label
+                  *ngFor="let minTime of minutes"
+                  class="btn btn-outline-primary mr-2"
+                  [btnRadio]="minTime" tabindex="0" role="button"
+                  name="MinPlayingTime">{{minTime}}
+                </label>
+                </div>
+            </div>
+
+            <div class="form-group col-12">
+                <p>Maximum Playing time</p>
+                  <div class="btn-group" btnRadioGroup name='MaxPlayingTime'
+                  [(ngModel)]="boardGamePreview.MaxPlayingTime">
+                    <label
+                    *ngFor="let maxTime of minutes"
+                    class="btn btn-outline-primary mr-2"
+                    [btnRadio]="maxTime" tabindex="0" role="button"
+                    name="MaxPlayingTime">{{maxTime}}
+                  </label>
+                  </div>
+            </div>
+
+            <div class="form-group col-12">
+              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(0)">Previous</button>
+              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(2)">Next</button>
+            </div>
+          </tab>
+
+          <tab heading="Video tutorial">
+            <div class="form-group col-12">
+              <label for="video">Video Url</label>
+              <input type="text" class="form-control" ngModel name="videoUrl"/>
+            </div>
+            <div class="form-group col-12">
+              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(1)">Previous</button>
+              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(3)">Next</button>
+            </div>
+          </tab>
+          <tab heading="Photos">
+            <div class="form-group col-12">
+              <div class="photo-control">
+                  <button class="mt-5" type="button">Upload</button> <br>
+                  This is under construction
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(2)">Previous</button>
+              <button type="submit" class="btn btn-primary mr-2">Save</button>
+              <button type="reset" class="btn btn-primary mr-2">Cancel</button>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+
+    </form>
+  </div>
+
+  </div>
+</div>
+
+<div class="col-4">
+  <div class="card-header">
+    <h5>Your BoargGame Preview</h5>
+    <div>
+      <app-boardgame-card [boardGame]="boardGamePreview"></app-boardgame-card>
+    </div>
+  </div>
+</div>
+</div>
+
+
