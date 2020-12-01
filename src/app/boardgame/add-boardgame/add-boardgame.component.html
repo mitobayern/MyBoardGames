@@ -5,10 +5,12 @@
     <h5>Add new Boardgame</h5>
   </div>
   <div class="card-body">
-    <form (ngSubmit)='onSubmit()' #Form="ngForm">
+    <form (ngSubmit)='onSubmit()' [formGroup]="addBoardGameForm" >
       <div>
         <tabset #formTabs>
-          <tab heading="Basic info" id="tab1">
+
+          <!-- TAB BASIC INFORMATION -->
+          <tab heading="Basic info" formGroupName="BasicInfo">
             <!-- <div class="form-group col-12">
               <p>I want to</p>
                 <div class="btn-group" btnRadioGroup name='OnSale' [(ngModel)]="propertyView.OnSale">
@@ -20,75 +22,108 @@
             </div> -->
 
             <div class="form-group col-12">
-              <label for="title">Game Title</label>
-              <input type="text" class="form-control" ngModel name="Title" [(ngModel)]="boardGamePreview.Title"/>
+              <label for="Title">Game Title</label>
+              <input type="text" class="form-control" formControlName="Title"
+                [(ngModel)]="boardGamePreview.Title"/>
+              <div class="error-block"
+                *ngIf="Title.invalid && (nextClicked || Title.touched)">
+                Please provide game Title
+              </div>
             </div>
 
             <div class="form-group col-12">
-              <label for="publisher">Game Publisher</label>
-              <input type="text" class="form-control" ngModel name="Publisher" [(ngModel)]="boardGamePreview.Publisher"/>
+              <label for="Publisher">Game Publisher</label>
+              <input type="text" class="form-control" formControlName="Publisher"
+                [(ngModel)]="boardGamePreview.Publisher"/>
+              <div class="error-block"
+                *ngIf="Publisher.invalid && (nextClicked || Publisher.touched)">
+                Please provide game Publisher
+              </div>
             </div>
 
             <div class="form-group col-12">
-              <label for="esigner">Game Designer</label>
-              <input type="text" class="form-control" ngModel name="Designer" [(ngModel)]="boardGamePreview.Designer" />
+              <label for="Designer">Game Designer</label>
+              <input type="text" class="form-control" formControlName="Designer"
+                [(ngModel)]="boardGamePreview.Designer"/>
+              <div class="error-block"
+                *ngIf="Publisher.invalid && (nextClicked || Designer.touched)">
+                Please provide game Designer
+              </div>
             </div>
 
             <div class="form-group col-12">
-              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(1)">Next</button>
+              <button type="button" class="btn btn-primary mr-2" (click)="selectTab(1, BasicInfo.valid)">Next</button>
             </div>
           </tab>
 
-          <tab heading="Other details">
+          <!-- TAB GAME DETAILS -->
+          <tab heading="Game details" formGroupName="GameDetails">
             <div class="form-group col-12">
               <p>Мinimum Players Count</p>
-                <div class="btn-group" btnRadioGroup name='MinPlayers'
+                <div class="btn-group" btnRadioGroup formControlName='MinPlayers'
                 [(ngModel)]="boardGamePreview.MinPlayers">
                   <label
                   *ngFor="let minPlayers of players"
-                  class="btn btn-outline-primary mr-2"
-                  [btnRadio]="minPlayers" tabindex="0" role="button"
-                  name="MinPlayers">{{minPlayers}}
+                  role="button" tabindex="0" class="btn btn-outline-primary mr-2"
+                  [btnRadio]="minPlayers"
+                  name="MinPlayers"
+                  >{{minPlayers}}
                 </label>
+                </div>
+                <div class="error-block" *ngIf="MinPlayers.invalid && nextClicked">
+                  Please select minimum players
                 </div>
             </div>
 
+
             <div class="form-group col-12">
                 <p>Maximum Players Count</p>
-                  <div class="btn-group" btnRadioGroup name='MaxPlayers'
+                  <div class="btn-group" btnRadioGroup formControlName='MaxPlayers'
                   [(ngModel)]="boardGamePreview.MaxPlayers">
                     <label
                     *ngFor="let maxPlayers of players"
-                    class="btn btn-outline-primary mr-2"
-                    [btnRadio]="maxPlayers" tabindex="0" role="button"
-                    name="MaxPlayers">{{maxPlayers}}
+                    role="button" tabindex="0" class="btn btn-outline-primary mr-2"
+                    [btnRadio]="maxPlayers"
+                    name="MaxPlayers"
+                    >{{maxPlayers}}
                   </label>
+                  </div>
+                  <div class="error-block" *ngIf="MaxPlayers.invalid && nextClicked">
+                    Please select maximum players
                   </div>
             </div>
 
             <div class="form-group col-12">
               <p>Мinimum Playing time</p>
-                <div class="btn-group" btnRadioGroup name='MinPlayingTime'
+                <div class="btn-group" btnRadioGroup formControlName='MinPlayingTime'
                 [(ngModel)]="boardGamePreview.MinPlayingTime">
                   <label
                   *ngFor="let minTime of minutes"
-                  class="btn btn-outline-primary mr-2"
-                  [btnRadio]="minTime" tabindex="0" role="button"
-                  name="MinPlayingTime">{{minTime}}
+                  role="button" tabindex="0" class="btn btn-outline-primary mr-2"
+                  [btnRadio]="minTime"
+                  name="MinPlayingTime"
+                  >{{minTime}}
                 </label>
+                </div>
+                <div class="error-block" *ngIf="MinPlayingTime.invalid && nextClicked">
+                  Please select minimum playing time
                 </div>
             </div>
 
             <div class="form-group col-12">
                 <p>Maximum Playing time</p>
-                  <div class="btn-group" btnRadioGroup name='MaxPlayingTime'
+                  <div class="btn-group" btnRadioGroup formControlName='MaxPlayingTime'
                   [(ngModel)]="boardGamePreview.MaxPlayingTime">
                     <label
                     *ngFor="let maxTime of minutes"
-                    class="btn btn-outline-primary mr-2"
-                    [btnRadio]="maxTime" tabindex="0" role="button"
-                    name="MaxPlayingTime">{{maxTime}}
+                    role="button" tabindex="0" class="btn btn-outline-primary mr-2"
+                    [btnRadio]="maxTime"
+                    name="MaxPlayingTime"
+                    >{{maxTime}}
                   </label>
+                  </div>
+                  <div class="error-block" *ngIf="MaxPlayingTime.invalid && nextClicked">
+                    Please select maximum playing time
                   </div>
             </div>
 
@@ -98,23 +133,33 @@
             </div>
           </tab>
 
-          <tab heading="Video tutorial">
+          <!-- TAB VIDEO TUTORIAL -->
+          <tab heading="Video tutorial" formGroupName="VideoTutorial">
             <div class="form-group col-12">
               <label for="video">Video Url</label>
-              <input type="text" class="form-control" ngModel name="videoUrl"/>
+              <input type="text" class="form-control" formControlName="VideoUrl"/>
+              <div class="error-block"
+                *ngIf="Publisher.invalid && (nextClicked || Designer.touched)">
+                Please provide video url
+              </div>
             </div>
+
             <div class="form-group col-12">
               <button type="button" class="btn btn-primary mr-2" (click)="selectTab(1)">Previous</button>
               <button type="button" class="btn btn-primary mr-2" (click)="selectTab(3)">Next</button>
             </div>
           </tab>
-          <tab heading="Photos">
+
+          <!-- TAB PHOTOS -->
+          <tab heading="Photos" formGroupName="GamePhotos">
             <div class="form-group col-12">
               <div class="photo-control">
-                  <button class="mt-5" type="button">Upload</button> <br>
+                  <button class="mt-5" type="button">Upload</button>
+                  <br>
                   This is under construction
               </div>
             </div>
+
             <div class="form-group col-12">
               <button type="button" class="btn btn-primary mr-2" (click)="selectTab(2)">Previous</button>
               <button type="submit" class="btn btn-primary mr-2">Save</button>
