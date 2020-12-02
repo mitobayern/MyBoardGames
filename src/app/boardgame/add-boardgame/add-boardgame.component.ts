@@ -79,6 +79,8 @@ export class AddBoardgameComponent implements OnInit {
       this.alertify.success('Congrats, your property listed successfully on our website');
       this.mapBoardGame();
       this.boardgameService.addBoardGame(this.boardGame);
+      console.log(this.boardGame);
+
       this.router.navigate(['/']);
     } else {
       this.nextClicked = true;

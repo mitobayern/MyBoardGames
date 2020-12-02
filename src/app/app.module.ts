@@ -8,6 +8,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms'
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
+
 
 
 import { AppComponent } from './app.component';
@@ -23,6 +25,7 @@ import { BoardgameSalesListComponent } from './boardgame/boardgame-sales-list/bo
 import { UserService } from './services/user.service';
 import { AlertifyService } from './services/alertify.service';
 import { BoardGamesService } from './services/boardGames.service';
+import { BoardgameVideoListComponent } from './boardgame/boardgame-video-list/boardgame-video-list.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', component: BoardgameListComponent },
@@ -30,7 +33,7 @@ const appRoutes: Routes = [
   { path: 'ranking', component: BoardgameListComponent },
   { path: 'add-boardgame', component: AddBoardgameComponent },
   { path: 'user/register', component: UserRegisterComponent },
-  { path: 'video-tutorials', component: AddBoardgameComponent },
+  { path: 'video-tutorials', component: BoardgameVideoListComponent },
   { path: 'marketplace', component: BoardgameSalesListComponent },
   { path: 'boardgame-details/:id', component: BoardgameDetailsComponent },
 
@@ -47,6 +50,7 @@ const appRoutes: Routes = [
     BoardgameListComponent,
     BoardgameDetailsComponent,
     BoardgameSalesListComponent,
+    BoardgameVideoListComponent,
   ],
   imports: [
     FormsModule,
@@ -58,6 +62,7 @@ const appRoutes: Routes = [
     TabsModule.forRoot(),
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
+    NgxYoutubePlayerModule.forRoot(),
   ],
   providers: [
     UserService,
