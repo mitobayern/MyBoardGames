@@ -1,7 +1,11 @@
-<iframe width="420" height="345" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-</iframe>
-
-<div *ngFor="let video of videos">
-<youtube-player width="600" height="400" [videoId]="video"></youtube-player>
-
+<div class="row" >
+  <div *ngFor="let video of videos" class="shadow-lg col-sm-6 p-3">
+    <div class="card">
+      <div class="card-body">
+        <youtube-player width="500" height="345" [videoId]="video"></youtube-player>
+      </div>
+    </div>
+  </div>
 </div>
+
+
