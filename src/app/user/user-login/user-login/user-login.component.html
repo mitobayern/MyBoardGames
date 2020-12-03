@@ -7,10 +7,10 @@
       <div class="card-body">
         <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
           <div class="form-group col-12">
-            <label for="name" class="form-label">Userame</label>
-            <input type="text" class="form-control" formControlName="userName"/>
-            <span *ngIf="!userName.valid && (userName.touched)" class="error-block">
-              Please provide username
+            <label for="name" class="form-label">Email</label>
+            <input type="text" class="form-control" formControlName="email"/>
+            <span *ngIf="!email.valid && (email.touched)" class="error-block">
+              Please provide email
             </span>
           </div>
 

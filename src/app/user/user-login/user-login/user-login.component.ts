@@ -13,35 +13,24 @@ export class UserLoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(
-    private router: Router,
-    private userService: UserService,
-    private alertify: AlertifyService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup(
       {
-        userName: new FormControl(null, Validators.required),
+        email: new FormControl(null, Validators.required),
         password: new FormControl(null, Validators.required),
       }
     );
   }
 
   onLogin(){
-    console.log(this.loginForm.value);
-    const currentUser = this.userService.AuthenticateUser(this.loginForm.value);
-    if(currentUser) {
-    localStorage.setItem('loggedUser', currentUser.userName);
-      this.alertify.success('Login successfull');
-      this.router.navigate(['/']);
-    } else {
-      this.alertify.error('Username and password do not match');
-    }
+    this.userService.login(this.loginForm.value.email, this.loginForm.value.password);
     this.loginForm.reset();
   }
 
-  get userName() {
-    return this.loginForm.get('userName') as FormControl;
+  get email() {
+    return this.loginForm.get('email') as FormControl;
   }
 
   get password() {
