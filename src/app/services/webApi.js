@@ -9,7 +9,7 @@ const endpoints = {
   REGISTER: 'users/register',
   LOGIN: 'users/login',
   LOGOUT: 'users/logout',
-  MOVIES: 'data/movies',
+  BOARDGAMES: 'data/boardgames',
 };
 
 //REGISTER USER
@@ -55,3 +55,32 @@ export async function logoutAsync() {
       }
   });
 }
+
+//CREATE BOARDGAME IN DATABASE
+export async function createBoardGameAsync(boardGame) {
+  const token = localStorage.getItem('userToken');
+
+  return (await fetch(host(endpoints.BOARDGAMES), {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'user-token': token
+      },
+      body: JSON.stringify(boardGame)
+  })).json();
+}
+
+
+//READ BOARDGAME FROM DATABASE BY GIVEN ID
+export async function getBoardGameByIdAsync(id) {
+  const token = localStorage.getItem('userToken');
+
+  return (await fetch(host(endpoints.BOARDGAMES + `/${id}`), {
+      headers: {
+          'Content-Type': 'application/json',
+          'user-token': token
+      }
+  })).json();
+}
+
+

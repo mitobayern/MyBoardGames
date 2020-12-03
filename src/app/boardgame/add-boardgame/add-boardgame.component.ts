@@ -76,11 +76,10 @@ export class AddBoardgameComponent implements OnInit {
 
   onSubmit() {
     if (this.allTabsValid()) {
-      this.alertify.success('Congrats, your property listed successfully on our website');
       this.mapBoardGame();
-      this.boardgameService.addBoardGame(this.boardGame);
-      console.log(this.boardGame);
+      this.boardgameService.createBoadGame(this.boardGame);
 
+      this.alertify.success('Congrats, your property listed successfully on our website');
       this.router.navigate(['/']);
     } else {
       this.nextClicked = true;
@@ -133,10 +132,8 @@ export class AddBoardgameComponent implements OnInit {
   }
 
   genereteEmbededVideoUrl(videoUrl: string){
-    const regex = /(?<=watch\?v=)[A-Za-z0-9-]+(?=&)/;
-    const found = videoUrl.match(regex)[0];
-    const embededLink = 'https://www.youtube.com/embed/';
-    return embededLink + found;
+    const regex = /(?<=watch\?v=)[A-Za-z0-9-_]+(?=&)/;
+    return videoUrl.match(regex)[0];;
   }
 
   get BasicInfo() {
@@ -190,6 +187,4 @@ export class AddBoardgameComponent implements OnInit {
   get VideoUrl(){
     return this.VideoTutorial.controls.VideoUrl as FormControl;
   }
-
-
 }

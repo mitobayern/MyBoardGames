@@ -13,5 +13,4 @@ export class BoardGame implements IBoardGame {
   Rating: number;
   Image?: string;
   VideoUrl: string;
-
 }

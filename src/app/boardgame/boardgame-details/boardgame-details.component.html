@@ -7,25 +7,13 @@
       </div>
       <div class="card-body">
         <h1 class="card-title">Name</h1>
+        
         <div>
-            <!-- <strong>{{property.BHK}} BHK {{property.PType}} @ ${{property.Price}}</strong> -->
-        </div>
-        <div>
-           <!-- <strong>in {{property.City}}</strong> -->
-        </div> <hr>
-        <div>
-            <strong>Build Area: </strong>
-            <!-- {{property.BuiltArea}} Sqft -->
+            <strong>Title: </strong>
+            {{boardGamePreview.Title}}
         </div>
 
-        <div>
-            <strong>Carpet Area: </strong>
-            <!-- {{property.CarpetArea}} Sqft -->
-        </div>
-        <div>
-            <strong>Rating: </strong>
-            <!-- {{property.FType}} -->
-        </div>
+
       </div>
       <div class="card-footer">
         <div class="btn-group d-flex">
@@ -63,26 +51,7 @@
                   </div>
               </div>
 
-              <div class="col-sm-6">
-                  <div class="heading">
-                      <strong>Main Entrance</strong>
-                      <!-- <p>{{property.MainEntrance}}</p> -->
-                  </div>
 
-                  <div class="heading">
-                      <strong>Gated Community</strong>
-                      <!-- <p>{{property.Gated}}</p> -->
-                  </div>
-
-                  <div class="heading">
-                      <strong>Security Deposit</strong>
-                      <!-- <p>{{property.Security}}</p> -->
-                  </div>
-                  <div class="heading">
-                      <strong>Maintenance</strong>
-                      <!-- <p>{{property.Maintenance}}</p> -->
-                  </div>
-              </div>
               <div class="col-sm-12">
                   <div class="heading">
                       <strong>About Property</strong>
@@ -93,7 +62,7 @@
         </tab>
         <tab heading="Video Tutorial">
           <div class="col-sm-12">
-            <youtube-player videoId="wZjxCDgLkr4"></youtube-player>
+            <youtube-player [videoId]="id"></youtube-player>
         </div>
 
         </tab>

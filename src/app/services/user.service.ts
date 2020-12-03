@@ -3,6 +3,7 @@ import { User } from '../models/user';
 import { Router } from '@angular/router';
 
 import { registerAsync, loginAsync, logoutAsync } from '../services/webApi.js'
+
 import { AlertifyService } from 'src/app/services/alertify.service';
 
 
@@ -68,8 +69,6 @@ export class UserService {
       throw error;
     }
   }
-
-
 
 
   addUser(user: User) {
