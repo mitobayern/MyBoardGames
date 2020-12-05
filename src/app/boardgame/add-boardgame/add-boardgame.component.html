@@ -155,9 +155,8 @@
           <tab heading="Photos" formGroupName="GamePhotos">
             <div class="form-group col-12">
               <div class="photo-control">
-                  <button class="mt-5" type="button">Upload</button>
-                  <br>
-                  This is under construction
+                  <label for="game_img">Upload game image</label>
+                  <input type="file"  id="game_img"  (change)="handleFileInput($event.target.files)">
               </div>
             </div>
 
@@ -178,7 +177,7 @@
 
 <div class="col-4">
   <div class="card-header">
-    <h5>Your BoargGame Preview</h5>
+    <h5>Your BoardGame Preview</h5>
     <div>
       <app-boardgame-card [boardGame]="boardGamePreview"></app-boardgame-card>
     </div>

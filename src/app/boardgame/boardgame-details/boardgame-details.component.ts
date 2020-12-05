@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BoardGame } from 'src/app/models/boardGame';
 import { IBoardGame } from 'src/app/models/IBoardGame.interface';
@@ -10,9 +10,8 @@ import { BoardGamesService } from 'src/app/services/boardGames.service';
   templateUrl: './boardgame-details.component.html',
   styleUrls: ['./boardgame-details.component.css']
 })
-export class BoardgameDetailsComponent implements OnInit {
-  [x: string]: any;
-  public id: 'string';
+export class BoardgameDetailsComponent implements OnInit, DoCheck {
+  public id: Array<string>;
 
 
   public boardGameId : string;
@@ -32,23 +31,26 @@ export class BoardgameDetailsComponent implements OnInit {
   };
   constructor(private route : ActivatedRoute, private boardGamesServcice: BoardGamesService) { }
 
+  ngDoCheck(): void {
+    console.log(this.boardGamePreview.VideoUrl);
+
+  }
+
   ngOnInit() {
     this.boardGameId = this.route.snapshot.params['id'];
-    
+
     const currentBoardGame = this.boardGamesServcice.gameDetails(this.boardGameId);
-    currentBoardGame.then( data => {
-    this.boardGamePreview.Title = data.Title,
-    this.boardGamePreview.VideoUrl = data.VideoUrl
-
-    console.log(this.boardGamePreview.VideoUrl);
-  }
-  );
-
-
+    currentBoardGame.then( v => {
+      this.boardGamePreview.Title = v.Title,
+      this.boardGamePreview.VideoUrl = v.VideoUrl
+    });
   }
 
+  savePlayer(event){
+    console.log(event);
+  }
 
-
-
-
+  onStateChange(event){
+    console.log(event);
+  }
 }

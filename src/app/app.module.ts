@@ -9,6 +9,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms'
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
+import Backendless from 'backendless';
 
 
 
@@ -39,6 +40,8 @@ const appRoutes: Routes = [
 
 ];
 
+Backendless.initApp("5BDFCD08-36D1-D8FE-FF9E-B312ECB3DC00","FE43AA78-FFB9-45F2-B43A-298ECFA60BA9");
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +71,7 @@ const appRoutes: Routes = [
     UserService,
     AlertifyService,
     BoardGamesService,
+
   ],
   bootstrap: [AppComponent],
 })

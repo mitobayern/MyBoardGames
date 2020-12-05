@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { IBoardGame } from '../models/IBoardGame.interface';
 import { Observable } from 'rxjs';
 import { BoardGame } from '../models/boardGame';
-import { createBoardGameAsync, getBoardGameByIdAsync } from '../services/webApi.js'
+import { createBoardGameAsync, getBoardGameByIdAsync, uploadFileAsync } from '../services/webApi.js'
 
 
 @Injectable({
@@ -31,17 +31,7 @@ export class BoardGamesService {
 
 
 
-  gameDetails2(): Observable<IBoardGame> {
-  return this.httpp.get('https://api.backendless.com/5BDFCD08-36D1-D8FE-FF9E-B312ECB3DC00/70EBAFD8-2834-4916-B7E2-A2212A7498FE/data/boardGames/21FC32BD-2581-487E-BEC4-80F13E515D67').pipe(
-    map((data) => {
-console.log(data);
-
-      return this.boardGamesArray;
-    })
-  );
-}
-
-  getAllBoardGamesOnSale(): Observable<IBoardGame[]> {
+    getAllBoardGamesOnSale(): Observable<IBoardGame[]> {
     return this.httpp.get('/data/boardGames.json').pipe(
       map((data) => {
         const boardGamesArray: Array<IBoardGame> = [];
@@ -55,7 +45,7 @@ console.log(data);
     );
   }
 
-  async createBoadGame(boardGame: BoardGame) {
+  async createBoadGame(boardGame: BoardGame, fileToUpload: File) {
     try {
       const newBoardGame = {
         Title: boardGame.Title,
@@ -66,11 +56,18 @@ console.log(data);
         MinPlayingTime: boardGame.MinPlayingTime,
         MaxPlayingTime: boardGame.MaxPlayingTime,
         VideoUrl: boardGame.VideoUrl,
-        creator: localStorage.userId
+        creator: localStorage.userId,
+        Image: null
       }
 
-      const result = await createBoardGameAsync(newBoardGame);
-      this.validateResult(result);
+      uploadFileAsync(fileToUpload).then(
+        response => {
+          newBoardGame.Image = response.fileURL;
+          const result = createBoardGameAsync(newBoardGame);
+        }
+
+      );
+
 
     } catch (err) {
       console.error(err);
@@ -78,10 +75,10 @@ console.log(data);
     }
   }
 
-   async gameDetails(id: string) {
-    const boardGame = await getBoardGameByIdAsync(id);
+   async gameDetails(id: string): Promise<BoardGame> {
+    const result = await getBoardGameByIdAsync(id);
 
-    return boardGame;
+    return result;
 
     // const context = Object.assign({movie}, this.app.userData);
 

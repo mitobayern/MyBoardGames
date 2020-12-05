@@ -7,7 +7,7 @@
       </div>
       <div class="card-body">
         <h1 class="card-title">Name</h1>
-        
+
         <div>
             <strong>Title: </strong>
             {{boardGamePreview.Title}}
@@ -61,8 +61,10 @@
             </div>
         </tab>
         <tab heading="Video Tutorial">
-          <div class="col-sm-12">
-            <youtube-player [videoId]="id"></youtube-player>
+          <div class="col-sm-12" *ngIf="boardGamePreview.VideoUrl">
+
+            <youtube-player [videoId]="boardGamePreview.VideoUrl" (ready)="savePlayer($event)"
+            (change)="onStateChange($event)"></youtube-player>
         </div>
 
         </tab>

@@ -36,6 +36,7 @@ export class AddBoardgameComponent implements OnInit {
   minutes: Array<number> = [30, 45, 60, 90, 120, 180, 240, 360, 480];
   nextClicked: boolean;
   boardGame = new BoardGame();
+  fileToUpload: File = null;
 
   constructor(
     private router: Router,
@@ -65,7 +66,7 @@ export class AddBoardgameComponent implements OnInit {
         VideoUrl: [null , Validators.required],
       }),
       GamePhotos: this.formBuilder.group({
-        Image: [null , Validators.required],
+        Image: [null],
       }),
     })
   }
@@ -77,7 +78,8 @@ export class AddBoardgameComponent implements OnInit {
   onSubmit() {
     if (this.allTabsValid()) {
       this.mapBoardGame();
-      this.boardgameService.createBoadGame(this.boardGame);
+      this.boardgameService.createBoadGame(this.boardGame, this.fileToUpload);
+      console.log(this.addBoardGameForm.value);
 
       this.alertify.success('Congrats, your property listed successfully on our website');
       this.router.navigate(['/']);
@@ -129,12 +131,30 @@ export class AddBoardgameComponent implements OnInit {
     this.boardGame.MinPlayingTime = this.MinPlayingTime.value;
     this.boardGame.MaxPlayingTime = this.MaxPlayingTime.value;
     this.boardGame.VideoUrl = this.genereteEmbededVideoUrl(this.VideoUrl.value);
+    this.boardGame.Image = this.Image.value;
   }
 
   genereteEmbededVideoUrl(videoUrl: string){
-    const regex = /(?<=watch\?v=)[A-Za-z0-9-_]+(?=&)/;
+    const regex = /(?<=watch\?v=)[A-Za-z0-9-]+(?=&)/;
     return videoUrl.match(regex)[0];;
   }
+
+  handleFileInput(files: FileList) {
+      this.fileToUpload = files.item(0);
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.boardGamePreview.Image = reader.result.toString();
+      };
+      reader.readAsDataURL(files.item(0));
+  }
+
+  // uploadFileToActivity() {
+  //   this.fileUploadService.saveFile(this.fileToUpload).subscribe(data => {
+  //     // do something, if upload success
+  //     }, error => {
+  //       console.log(error);
+  //     });
+  // }
 
   get BasicInfo() {
     return this.addBoardGameForm.controls.BasicInfo as FormGroup;
@@ -149,7 +169,7 @@ export class AddBoardgameComponent implements OnInit {
   }
 
   get GamePhotos(){
-    return this.addBoardGameForm.controls.VideoTutorial as FormGroup;
+    return this.addBoardGameForm.controls.GamePhotos as FormGroup;
   }
 
   get Title(){
@@ -186,5 +206,9 @@ export class AddBoardgameComponent implements OnInit {
 
   get VideoUrl(){
     return this.VideoTutorial.controls.VideoUrl as FormControl;
+  }
+
+  get Image(){
+    return this.GamePhotos.controls.Image as FormControl;
   }
 }

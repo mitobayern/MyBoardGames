@@ -10,6 +10,7 @@ const endpoints = {
   LOGIN: 'users/login',
   LOGOUT: 'users/logout',
   BOARDGAMES: 'data/boardgames',
+  IMAGES_UPLOAD:'files/images',
 };
 
 //REGISTER USER
@@ -57,18 +58,27 @@ export async function logoutAsync() {
 }
 
 //CREATE BOARDGAME IN DATABASE
-export async function createBoardGameAsync(boardGame) {
+export function createBoardGameAsync(boardGame) {
   const token = localStorage.getItem('userToken');
-
-  return (await fetch(host(endpoints.BOARDGAMES), {
+console.log(boardGame);
+  return ( fetch(host(endpoints.BOARDGAMES), {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
           'user-token': token
       },
       body: JSON.stringify(boardGame)
-  })).json();
+  })).then(resposne => resposne.json());
 }
+
+
+//UPLOAD FILE IMAGE IN DATABASE
+export async function uploadFileAsync(fileToUpload) {
+  const token = localStorage.getItem('userToken');
+  return Backendless.Files.upload( fileToUpload, 'images', true );
+}
+
+
 
 
 //READ BOARDGAME FROM DATABASE BY GIVEN ID
@@ -83,4 +93,21 @@ export async function getBoardGameByIdAsync(id) {
   })).json();
 }
 
+// export const handleFileSelect = event => {
+//   const { files } = event.target // FileList object
 
+//   for (let file of files) {
+//     Backendless.Files.upload(file, '/myFiles')
+//       .then(onSuccess, onError)
+//   }
+// }
+
+// export const onSuccess = file => {
+//   console.log('Uploaded file URL - ' + file.fileURL)
+// }
+
+// export const onError = error => {
+//   console.error('Server reported an error: ', error.message)
+//   console.error('error code: ', error.code)
+//   console.error('http status: ', error.status)
+// }
