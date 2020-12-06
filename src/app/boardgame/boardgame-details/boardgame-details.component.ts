@@ -16,7 +16,7 @@ export class BoardgameDetailsComponent implements OnInit, DoCheck {
 
   public boardGameId : string;
   boardGamePreview: IBoardGame = {
-    Id: null,
+    objectId: null,
     Title: '',
     OnSale: false,
     Publisher: null,

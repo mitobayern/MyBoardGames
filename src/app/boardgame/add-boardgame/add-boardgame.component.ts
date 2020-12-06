@@ -17,7 +17,7 @@ export class AddBoardgameComponent implements OnInit {
   @ViewChild('formTabs') formTabs: TabsetComponent;
 
   boardGamePreview: IBoardGame = {
-    Id: null,
+    objectId: null,
     Title: '',
     OnSale: false,
     Publisher: null,

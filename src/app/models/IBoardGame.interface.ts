@@ -1,5 +1,5 @@
 export interface IBoardGame {
-  Id: number;
+  objectId: string;
   OnSale: boolean,
   Title: string;
   Publisher: string,

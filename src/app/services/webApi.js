@@ -29,6 +29,7 @@ export async function registerAsync(email, password, userName, mobile) {
   })).json()
 }
 
+
 //LOGIN USER WITH EMAIL
 export async function loginAsync(email, password) {
   const result = await (await fetch(host(endpoints.LOGIN), {
@@ -45,6 +46,7 @@ export async function loginAsync(email, password) {
   return result;
 }
 
+
 //LOGOUT USER
 export async function logoutAsync() {
   const token = localStorage.getItem('userToken');
@@ -56,6 +58,7 @@ export async function logoutAsync() {
       }
   });
 }
+
 
 //CREATE BOARDGAME IN DATABASE
 export function createBoardGameAsync(boardGame) {
@@ -72,13 +75,11 @@ console.log(boardGame);
 }
 
 
-//UPLOAD FILE IMAGE IN DATABASE
+//UPLOAD IMAGE FILE IN DATABASE
 export async function uploadFileAsync(fileToUpload) {
   const token = localStorage.getItem('userToken');
   return Backendless.Files.upload( fileToUpload, 'images', true );
 }
-
-
 
 
 //READ BOARDGAME FROM DATABASE BY GIVEN ID
@@ -92,6 +93,20 @@ export async function getBoardGameByIdAsync(id) {
       }
   })).json();
 }
+
+
+//READ ALL BOARDGAMES FROM DATABASE
+export async function getAllBoardGamesAsync() {
+  const token = localStorage.getItem('userToken');
+
+  return (await fetch(host(endpoints.BOARDGAMES), {
+      headers: {
+          'Content-Type': 'application/json',
+          'user-token': token
+      }
+  })).json();
+}
+
 
 // export const handleFileSelect = event => {
 //   const { files } = event.target // FileList object

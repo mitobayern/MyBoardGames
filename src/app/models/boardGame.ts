@@ -1,7 +1,7 @@
 import { IBoardGame } from './IBoardGame.interface';
 
 export class BoardGame implements IBoardGame {
-  Id: number;
+  objectId: string;
   OnSale: boolean;
   Title: string;
   Publisher: string;
