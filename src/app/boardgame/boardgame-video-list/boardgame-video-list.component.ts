@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BoardGamesService } from 'src/app/services/boardGames.service';
 
 @Component({
   selector: 'app-boardgame-video-list',
@@ -7,17 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardgameVideoListComponent implements OnInit {
 
-  videos: Array<string> = [
-    'wZjxCDgLkr4',
-    'LqVythdYlaQ',
-    'jICk9vjQ3Jk',
-    'fEwDx8YJndU',
-    'OonzeFYrt_o',
-    'lrOK75_cXnU'];
+  videos: Array<string> = [];
 
-  constructor() { }
+
+
+  constructor(private boardGamesService: BoardGamesService) { }
 
   ngOnInit() {
+    this.boardGamesService.getAllVideoTutorials().subscribe(
+      (data) => {
+        this.videos = data;
+      },
+      (error) => {
+        console.log('httperror: ');
+        console.log(error);
+      }
+    );
+    console.log(this.videos);
   }
 
 }

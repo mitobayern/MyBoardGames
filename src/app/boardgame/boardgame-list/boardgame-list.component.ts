@@ -22,5 +22,6 @@ export class BoardgameListComponent implements OnInit {
         console.log(error);
       }
     );
+
   }
 }

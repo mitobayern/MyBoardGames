@@ -107,6 +107,19 @@ export async function getAllBoardGamesAsync() {
   })).json();
 }
 
+//DELETE OBJECT FROM DATABASE BY GIVEN ID
+export async function deleteBoardGameAsync(id) {
+  const token = localStorage.getItem('userToken');
+
+  return (await fetch(host(endpoints.BOARDGAMES + `/${id}`), {
+      method: 'DELETE',
+      headers: {
+          'Content-Type': 'application/json',
+          'user-token': token
+      }
+  })).json();
+}
+
 
 // export const handleFileSelect = event => {
 //   const { files } = event.target // FileList object

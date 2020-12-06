@@ -19,6 +19,7 @@ export class BoardGamesService {
     return from(getAllBoardGamesAsync()).pipe(
       map((data:any) => {
         const boardGamesArray: Array<IBoardGame> = [];
+
         for (const id in data) {
           if (data.hasOwnProperty(id)) {
             boardGamesArray.push(data[id]);
@@ -31,8 +32,7 @@ export class BoardGamesService {
     );
   }
 
-
-    getAllBoardGamesOnSale(): Observable<IBoardGame[]> {
+  getAllBoardGamesOnSale(): Observable<IBoardGame[]> {
     return from(getAllBoardGamesAsync()).pipe(
       map((data:any) => {
         const boardGamesArray: Array<IBoardGame> = [];
@@ -89,11 +89,26 @@ export class BoardGamesService {
     }
   }
 
-   async gameDetails(id: string): Promise<BoardGame> {
+  async gameDetails(id: string): Promise<BoardGame> {
     return await getBoardGameByIdAsync(id);
-}
+  }
 
+  getAllVideoTutorials():Observable<string[]>  {
+    return from(getAllBoardGamesAsync()).pipe(
+      map((data:any) => {
+        const videoUrls: Array<string> = [];
 
+        for (const id in data) {
+          if (data.hasOwnProperty(id)) {
+            videoUrls.push(data[id].VideoUrl)
+          }
+        }
+        console.log(videoUrls);
+
+        return videoUrls;
+      })
+    );
+  }
 
 
 

@@ -2,8 +2,7 @@
   <div class="col-sm-4 p-0">
     <div class="card">
       <div class="card-img-wrapper">
-        <!-- <img *ngIf="property.Image" class="card-img-top" src="assets/images/{{property.Image}}.png">
-        <img *ngIf="!property.Image" class="card-img-top" src="assets/images/house_default.png"> -->
+        <img class="card-img-top" src="{{boardGamePreview.Image}}">
       </div>
       <div class="card-body">
         <h1 class="card-title">Name</h1>
@@ -19,6 +18,8 @@
         <div class="btn-group d-flex">
           <button class="btn btn-primary">Like</button>
           <button class="btn btn-success">Message</button>
+          <button class="btn btn-danger">Delete</button>
+
         </div>
       </div>
   </div>

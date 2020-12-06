@@ -40,9 +40,18 @@ export class BoardgameDetailsComponent implements OnInit, DoCheck {
     this.boardGameId = this.route.snapshot.params['id'];
 
     const currentBoardGame = this.boardGamesServcice.gameDetails(this.boardGameId);
-    currentBoardGame.then( v => {
-      this.boardGamePreview.Title = v.Title,
-      this.boardGamePreview.VideoUrl = v.VideoUrl
+    currentBoardGame.then( data => {
+      this.boardGamePreview.objectId = data.objectId,
+      this.boardGamePreview.Title = data.Title,
+      this.boardGamePreview.Publisher = data.Publisher,
+      this.boardGamePreview.Designer = data.Designer,
+      this.boardGamePreview.MinPlayers = data.MinPlayers,
+      this.boardGamePreview.MaxPlayers = data.MaxPlayers,
+      this.boardGamePreview.MinPlayingTime = data.MinPlayingTime,
+      this.boardGamePreview.MaxPlayingTime = data.MaxPlayingTime,
+      this.boardGamePreview.Image = data.Image,
+      this.boardGamePreview.VideoUrl = data.VideoUrl,
+      this.boardGamePreview.Rating = data.Rating
     });
   }
 
