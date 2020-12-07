@@ -63,7 +63,6 @@ export async function logoutAsync() {
 //CREATE BOARDGAME IN DATABASE
 export function createBoardGameAsync(boardGame) {
   const token = localStorage.getItem('userToken');
-console.log(boardGame);
   return ( fetch(host(endpoints.BOARDGAMES), {
       method: 'POST',
       headers: {
@@ -104,6 +103,20 @@ export async function getAllBoardGamesAsync() {
           'Content-Type': 'application/json',
           'user-token': token
       }
+  })).json();
+}
+
+//UPDATE OBJECT IN DATABASE BY GIVEN ID
+export async function updateBoardGameAsync(id, updatedBoardGame) {
+  const token = localStorage.getItem('userToken');
+
+  return (await fetch(host(endpoints.BOARDGAMES + `/${id}`), {
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json',
+          'user-token': token
+      },
+      body: JSON.stringify(updatedBoardGame)
   })).json();
 }
 

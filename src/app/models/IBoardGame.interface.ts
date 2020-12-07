@@ -11,5 +11,6 @@ export interface IBoardGame {
   Rating: number,
   Image?: string,
   VideoUrl: string;
+  ownerId:string,
 }
 

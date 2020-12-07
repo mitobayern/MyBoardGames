@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { IBoardGame } from '../models/IBoardGame.interface';
 import { Observable, from } from 'rxjs';
 import { BoardGame } from '../models/boardGame';
-import { createBoardGameAsync, getBoardGameByIdAsync, uploadFileAsync, getAllBoardGamesAsync } from '../services/webApi.js'
+import { createBoardGameAsync, getBoardGameByIdAsync, uploadFileAsync, getAllBoardGamesAsync, updateBoardGameAsync } from '../services/webApi.js'
 
 
 @Injectable({
@@ -82,6 +82,40 @@ export class BoardGamesService {
         }
       );
 
+
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  }
+
+  async editBoadGame(boardGame: BoardGame, fileToUpload?: File) {
+    try {
+      const newBoardGame = {
+        Title: boardGame.Title,
+        Publisher: boardGame.Publisher,
+        Designer: boardGame.Designer,
+        MinPlayers: boardGame.MinPlayers,
+        MaxPlayers: boardGame.MaxPlayers,
+        MinPlayingTime: boardGame.MinPlayingTime,
+        MaxPlayingTime: boardGame.MaxPlayingTime,
+        VideoUrl: boardGame.VideoUrl,
+        creator: localStorage.userId,
+        Image: boardGame.Image
+      }
+
+      if(fileToUpload) {
+        uploadFileAsync(fileToUpload).then(
+          response => {
+            newBoardGame.Image = response.fileURL;
+            const result = updateBoardGameAsync(boardGame.objectId, newBoardGame);
+          }
+        );
+      } else {
+        console.log(newBoardGame);
+
+        const result = updateBoardGameAsync(boardGame.objectId, newBoardGame);
+      }
 
     } catch (err) {
       console.error(err);

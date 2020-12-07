@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { BoardGame } from 'src/app/models/boardGame';
 import { AlertifyService } from 'src/app/services/alertify.service';
@@ -8,13 +8,13 @@ import { BoardGamesService } from 'src/app/services/boardGames.service';
 import { IBoardGame } from '../../models/IBoardGame.interface';
 
 @Component({
-  selector: 'app-add-boardgame',
-  templateUrl: './add-boardgame.component.html',
-  styleUrls: ['./add-boardgame.component.css'],
+  selector: 'app-edit-boardgame',
+  templateUrl: './edit-boardgame.component.html',
+  styleUrls: ['./edit-boardgame.component.css']
 })
-export class AddBoardgameComponent implements OnInit {
-  // @ViewChild('Form') createBoardgameForm: NgForm;
+export class EditBoardgameComponent implements OnInit {
   @ViewChild('formTabs') formTabs: TabsetComponent;
+
 
   boardGamePreview: IBoardGame = {
     objectId: null,
@@ -32,14 +32,19 @@ export class AddBoardgameComponent implements OnInit {
     ownerId: null,
   };
 
+  public boardGameId: string;
   addBoardGameForm: FormGroup;
   players: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   minutes: Array<number> = [30, 45, 60, 90, 120, 180, 240, 360, 480];
   nextClicked: boolean;
   boardGame = new BoardGame();
   fileToUpload: File = null;
+  public isOwner: boolean;
+  imageUrl: string;
+
 
   constructor(
+    private route : ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
     private alertify: AlertifyService,
@@ -47,6 +52,30 @@ export class AddBoardgameComponent implements OnInit {
 
   ngOnInit() {
     this.CreateAddBoardGameForm();
+    this.boardGameId = this.route.snapshot.params['id'];
+
+    const currentBoardGame = this.boardgameService.gameDetails(this.boardGameId);
+    currentBoardGame.then( data => {
+      this.boardGamePreview.objectId = data.objectId,
+      this.boardGamePreview.Title = data.Title,
+      this.boardGamePreview.Publisher = data.Publisher,
+      this.boardGamePreview.Designer = data.Designer,
+      this.boardGamePreview.MinPlayers = data.MinPlayers,
+      this.boardGamePreview.MaxPlayers = data.MaxPlayers,
+      this.boardGamePreview.MinPlayingTime = data.MinPlayingTime,
+      this.boardGamePreview.MaxPlayingTime = data.MaxPlayingTime,
+      this.boardGamePreview.Image = data.Image,
+      this.boardGamePreview.VideoUrl = 'watch\?v='+ data.VideoUrl + '&',
+      this.boardGamePreview.Rating = data.Rating,
+      this.boardGamePreview.ownerId = data.ownerId,
+      this.imageUrl = data.Image,
+      this.isOwner = this.validateOwner()
+
+    });
+  }
+
+  validateOwner(){
+    return this.boardGamePreview.ownerId === localStorage.getItem('userId') ? true : false;
   }
 
   CreateAddBoardGameForm() {
@@ -79,9 +108,7 @@ export class AddBoardgameComponent implements OnInit {
   onSubmit() {
     if (this.allTabsValid()) {
       this.mapBoardGame();
-      this.boardgameService.createBoadGame(this.boardGame, this.fileToUpload);
-      console.log(this.addBoardGameForm.value);
-
+      this.boardgameService.editBoadGame(this.boardGame, this.fileToUpload);
       this.alertify.success('Congrats, your property listed successfully on our website');
       this.router.navigate(['/']);
     } else {
@@ -89,7 +116,6 @@ export class AddBoardgameComponent implements OnInit {
       this.alertify.error('Please review the form and provide all valid entries');
     }
 
-    console.log(this.addBoardGameForm.value);
   }
 
   selectTab(tabId: number, isCurrentTabValid: boolean) {
@@ -124,6 +150,7 @@ export class AddBoardgameComponent implements OnInit {
   }
 
   mapBoardGame(): void {
+    this.boardGame.objectId = this.boardGameId,
     this.boardGame.Title = this.Title.value;
     this.boardGame.Designer = this.Designer.value;
     this.boardGame.Publisher = this.Publisher.value;
@@ -132,7 +159,7 @@ export class AddBoardgameComponent implements OnInit {
     this.boardGame.MinPlayingTime = this.MinPlayingTime.value;
     this.boardGame.MaxPlayingTime = this.MaxPlayingTime.value;
     this.boardGame.VideoUrl = this.genereteEmbededVideoUrl(this.VideoUrl.value);
-    this.boardGame.Image = this.Image.value;
+    this.boardGame.Image = this.imageUrl;
   }
 
   genereteEmbededVideoUrl(videoUrl: string){
@@ -148,14 +175,6 @@ export class AddBoardgameComponent implements OnInit {
       };
       reader.readAsDataURL(files.item(0));
   }
-
-  // uploadFileToActivity() {
-  //   this.fileUploadService.saveFile(this.fileToUpload).subscribe(data => {
-  //     // do something, if upload success
-  //     }, error => {
-  //       console.log(error);
-  //     });
-  // }
 
   get BasicInfo() {
     return this.addBoardGameForm.controls.BasicInfo as FormGroup;

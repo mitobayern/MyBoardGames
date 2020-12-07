@@ -5,20 +5,17 @@
         <img class="card-img-top" src="{{boardGamePreview.Image}}">
       </div>
       <div class="card-body">
-        <h1 class="card-title">Name</h1>
-
         <div>
-            <strong>Title: </strong>
-            {{boardGamePreview.Title}}
+            <h5>{{boardGamePreview.Title}}</h5>
         </div>
 
 
       </div>
       <div class="card-footer">
         <div class="btn-group d-flex">
-          <button class="btn btn-primary">Like</button>
-          <button class="btn btn-success">Message</button>
-          <button class="btn btn-danger">Delete</button>
+          <button class="btn btn-primary">Rate game</button>
+          <button *ngIf="isOwner" routerLink="/edit-boardgame/{{boardGamePreview.objectId}}" class="btn btn-success">Edit</button>
+          <button *ngIf="isOwner" class="btn btn-danger">Remove from library</button>
 
         </div>
       </div>

@@ -10,11 +10,12 @@ import { BoardGamesService } from 'src/app/services/boardGames.service';
   templateUrl: './boardgame-details.component.html',
   styleUrls: ['./boardgame-details.component.css']
 })
-export class BoardgameDetailsComponent implements OnInit, DoCheck {
+export class BoardgameDetailsComponent implements OnInit {
+
   public id: Array<string>;
+  public isOwner: boolean;
+  public boardGameId: string;
 
-
-  public boardGameId : string;
   boardGamePreview: IBoardGame = {
     objectId: null,
     Title: '',
@@ -28,13 +29,11 @@ export class BoardgameDetailsComponent implements OnInit, DoCheck {
     Rating: null,
     Image: null,
     VideoUrl: null,
+    ownerId: null
   };
+  
   constructor(private route : ActivatedRoute, private boardGamesServcice: BoardGamesService) { }
 
-  ngDoCheck(): void {
-    console.log(this.boardGamePreview.VideoUrl);
-
-  }
 
   ngOnInit() {
     this.boardGameId = this.route.snapshot.params['id'];
@@ -51,8 +50,17 @@ export class BoardgameDetailsComponent implements OnInit, DoCheck {
       this.boardGamePreview.MaxPlayingTime = data.MaxPlayingTime,
       this.boardGamePreview.Image = data.Image,
       this.boardGamePreview.VideoUrl = data.VideoUrl,
-      this.boardGamePreview.Rating = data.Rating
+      this.boardGamePreview.Rating = data.Rating,
+      this.boardGamePreview.ownerId = data.ownerId,
+      this.isOwner = this.validateOwner()
     });
+
+
+
+  }
+
+  validateOwner(){
+    return this.boardGamePreview.ownerId === localStorage.getItem('userId') ? true : false;
   }
 
   savePlayer(event){
