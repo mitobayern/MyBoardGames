@@ -7,20 +7,26 @@
       <div class="card-body">
         <div>
             <h5>{{boardGamePreview.Title}}</h5>
+            <h5>Rating: {{averageRating}}</h5>
+
         </div>
 
 
       </div>
       <div class="card-footer">
         <div class="btn-group d-flex">
-          <button class="btn btn-primary" (click)="onRateClicked()">Rate game</button>
-          <button *ngIf="isOwner" routerLink="/edit-boardgame/{{boardGamePreview.objectId}}" class="btn btn-success">Edit</button>
-          <button *ngIf="isOwner" class="btn btn-danger">Remove from library</button>
+          <button class="btn btn-primary mr-2" (click)="onRateClicked()">Rate game</button>
+          <button *ngIf="isOwner" routerLink="/edit-boardgame/{{boardGamePreview.objectId}}" class="btn btn-success mr-2">Edit</button>
+          <button *ngIf="isOwner && !boardGamePreview.OnSale" class="btn btn-danger" (click)="onSaleClicked()">List for sale</button>
+          <button *ngIf="isOwner && boardGamePreview.OnSale" class="btn btn-dark" (click)="onSaleClicked()">Not for sale</button>
         </div>
         <div class="form-group col-12" *ngIf="isRateClicked">
           <form (ngSubmit)='onSubmit()' [formGroup]="addRatingForm">
-
-          <p>Rate this game</p>
+          <div *ngIf="isRated">
+            <br>
+            <h6>Your have already rated this game with: {{currentRating.Rating}}</h6>
+            <br>
+          </div>
             <div class="btn-group" btnRadioGroup formControlName='Rating'>
               <label
               *ngFor="let number of ratingNumbers"
@@ -30,10 +36,7 @@
               >{{number}}
             </label>
             </div>
-            <!-- <div class="error-block" *ngIf="MinPlayers.invalid && nextClicked">
-              Please select minimum players
-            </div> -->
-            <button type="submit" [disabled]="isRated" class="btn btn-primary mr-2">Submit your Rating</button>
+            <button type="submit" class="btn btn-primary mr-2">Submit your Rating</button>
           </form>
 
         </div>

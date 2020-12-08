@@ -146,6 +146,21 @@ export async function updateBoardGameAsync(id, updatedBoardGame) {
   })).json();
 }
 
+//UPDATE OBJECT IN DATABASE BY GIVEN ID
+export async function updateRatingAsync(id, rating) {
+  const token = localStorage.getItem('userToken');
+
+  return (await fetch(host(endpoints.RATINGS + `/${id}`), {
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json',
+          'user-token': token
+      },
+      body: JSON.stringify(rating)
+  })).json();
+}
+
+
 //DELETE OBJECT FROM DATABASE BY GIVEN ID
 export async function deleteBoardGameAsync(id) {
   const token = localStorage.getItem('userToken');

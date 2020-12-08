@@ -6,7 +6,7 @@ import { Observable, from } from 'rxjs';
 import { BoardGame } from '../models/boardGame';
 import { Rating } from '../models/rating';
 
-import { createBoardGameAsync, getBoardGameByIdAsync, uploadFileAsync, getAllBoardGamesAsync, updateBoardGameAsync, rateBoardGameAsync, getAllRatingsAsync } from '../services/webApi.js'
+import { createBoardGameAsync, getBoardGameByIdAsync, uploadFileAsync, getAllBoardGamesAsync, updateBoardGameAsync, rateBoardGameAsync, getAllRatingsAsync, updateRatingAsync } from '../services/webApi.js'
 
 
 @Injectable({
@@ -27,7 +27,6 @@ export class BoardGamesService {
             boardGamesArray.push(data[id]);
           }
         }
-        console.log(boardGamesArray);
 
         return boardGamesArray;
       })
@@ -38,11 +37,13 @@ export class BoardGamesService {
     return from(getAllBoardGamesAsync()).pipe(
       map((data:any) => {
         const boardGamesArray: Array<IBoardGame> = [];
+
         for (const id in data) {
-          if (data.hasOwnProperty(id) && data[id].onSale === true ) {
+          if (data.hasOwnProperty(id) && data[id].OnSale === true ) {
             boardGamesArray.push(data[id]);
           }
         }
+
         return boardGamesArray;
       })
     );
@@ -77,6 +78,26 @@ export class BoardGamesService {
       })
     );
   }
+
+  getAverageGameRatingByGameId(gameId): Observable<number> {
+    return from(getAllRatingsAsync()).pipe(
+      map((data:any) => {
+        var rating: number = 0;
+        var counter: number = 0;
+        for (const id in data) {
+          if (data.hasOwnProperty(id) && data[id].GameId === gameId) {
+            rating += +(data[id].Rating);
+            counter++;
+          }
+        }
+        rating = rating/counter;
+
+        return rating;
+      })
+    );
+  }
+
+
 
   async createBoadGame(boardGame: BoardGame, fileToUpload: File) {
     try {
@@ -116,12 +137,29 @@ export class BoardGamesService {
       }
 
       rateBoardGameAsync(newRating);
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  }
+
+  async updateRating(rating: Rating) {
+    try {
+      const newRating = {
+        GameId: rating.GameId,
+        Rating: rating.Rating,
+        ownerId: rating.ownerId,
+        objectId: rating.objectId
+      }
+
+      updateRatingAsync(newRating.objectId, newRating);
 
     } catch (err) {
       console.error(err);
       alert(err.message);
     }
   }
+
 
 
   async editBoadGame(boardGame: BoardGame, fileToUpload?: File) {
@@ -136,7 +174,9 @@ export class BoardGamesService {
         MaxPlayingTime: boardGame.MaxPlayingTime,
         VideoUrl: boardGame.VideoUrl,
         creator: localStorage.userId,
-        Image: boardGame.Image
+        Image: boardGame.Image,
+        Rating: boardGame.Rating,
+        OnSale: boardGame.OnSale
       }
 
       if(fileToUpload) {
@@ -172,7 +212,6 @@ export class BoardGamesService {
             videoUrls.push(data[id].VideoUrl)
           }
         }
-        console.log(videoUrls);
 
         return videoUrls;
       })
