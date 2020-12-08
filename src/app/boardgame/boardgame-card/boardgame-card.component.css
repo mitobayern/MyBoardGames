@@ -27,6 +27,8 @@
 .card-immage-wrapper {
   overflow: hidden;
   position: relative;
+  text-align: center;
+  background: #05182ecf;
 }
 
 .imgage-icons {

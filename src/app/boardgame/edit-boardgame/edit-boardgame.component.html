@@ -163,7 +163,7 @@
 
             <div class="form-group col-12">
               <button type="button" class="btn btn-primary mr-2" (click)="selectTab(2, BasicInfo.valid)">Previous</button>
-              <button type="submit" class="btn btn-primary mr-2">Save</button>
+              <button type="submit" class="btn btn-primary mr-2" [disabled]="disableSubmit">Save</button>
               <button type="reset" class="btn btn-primary mr-2">Cancel</button>
             </div>
           </tab>

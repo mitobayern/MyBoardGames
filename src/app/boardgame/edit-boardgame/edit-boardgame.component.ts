@@ -26,6 +26,7 @@ export class EditBoardgameComponent implements OnInit {
   addBoardGameForm: FormGroup;
   players: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   minutes: Array<number> = [30, 45, 60, 90, 120, 180, 240, 360, 480];
+  disableSubmit: boolean = false;
 
   boardGamePreview: IBoardGame = {
     objectId: null,
@@ -106,10 +107,12 @@ export class EditBoardgameComponent implements OnInit {
 
   onSubmit() {
     if (this.allTabsValid()) {
+      this.disableSubmit = true;
       this.mapBoardGame();
-      this.boardgameService.editBoadGame(this.boardGame, this.fileToUpload);
-      this.alertify.success('Congrats, your BoardGame was successfully edited');
-      this.router.navigate(['/']);
+      this.boardgameService.editBoadGame(this.boardGame, this.fileToUpload).then(() => {
+        this.alertify.success('Congrats, your BoardGame was successfully edited');
+        this.router.navigate(['/']);
+      });
     } else {
       this.nextClicked = true;
       this.alertify.error('Please review the form and provide all valid entries');

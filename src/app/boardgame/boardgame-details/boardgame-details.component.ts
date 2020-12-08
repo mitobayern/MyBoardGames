@@ -25,6 +25,7 @@ export class BoardgameDetailsComponent implements OnInit {
   public ratingNumbers: Array<Number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   public isRated: boolean;
   public averageRating: number;
+  public disableSubmit: boolean = false;
 
 
   boardGamePreview: IBoardGame = {
@@ -113,6 +114,7 @@ export class BoardgameDetailsComponent implements OnInit {
   }
 
   onSubmit(){
+    this.disableSubmit = true;
     this.mapRating();
     if(this.isRated){
       this.rating.objectId = this.currentRating.objectId
@@ -122,7 +124,9 @@ export class BoardgameDetailsComponent implements OnInit {
       this.boardGamesService.getAverageGameRatingByGameId(this.boardGameId).subscribe(
         (data) => {
           this.boardGamePreview.Rating = data;
-          this.boardGamesService.editBoadGame(this.boardGamePreview);
+          this.boardGamesService.editBoadGame(this.boardGamePreview).then(() => {
+            this.router.navigate(['/']);
+          });
         },
         (error) => {
           console.log('httperror: ');
@@ -134,7 +138,6 @@ export class BoardgameDetailsComponent implements OnInit {
       this.boardGamesService.rateBoadGame(this.rating);
       this.alertify.success(`You have succesfuly rated this game with ${this.rating.Rating}`);
     }
-    this.router.navigate(['/']);
   }
 
   onSaleClicked(){

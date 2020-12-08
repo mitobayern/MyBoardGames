@@ -99,7 +99,7 @@ export class BoardGamesService {
 
 
 
-  async createBoadGame(boardGame: BoardGame, fileToUpload: File) {
+  createBoadGame(boardGame: BoardGame, fileToUpload: File) {
     try {
       const newBoardGame = {
         Title: boardGame.Title,
@@ -114,10 +114,10 @@ export class BoardGamesService {
         Image: null
       }
 
-      uploadFileAsync(fileToUpload).then(
+      return uploadFileAsync(fileToUpload).then(
         response => {
           newBoardGame.Image = response.fileURL;
-          const result = createBoardGameAsync(newBoardGame);
+          return createBoardGameAsync(newBoardGame);
         }
       );
 
@@ -162,7 +162,7 @@ export class BoardGamesService {
 
 
 
-  async editBoadGame(boardGame: BoardGame, fileToUpload?: File) {
+  editBoadGame(boardGame: BoardGame, fileToUpload?: File) {
     try {
       const newBoardGame = {
         Title: boardGame.Title,
@@ -180,16 +180,14 @@ export class BoardGamesService {
       }
 
       if(fileToUpload) {
-        uploadFileAsync(fileToUpload).then(
+        return uploadFileAsync(fileToUpload).then(
           response => {
             newBoardGame.Image = response.fileURL;
-            const result = updateBoardGameAsync(boardGame.objectId, newBoardGame);
+            return updateBoardGameAsync(boardGame.objectId, newBoardGame);
           }
         );
       } else {
-        console.log(newBoardGame);
-
-        const result = updateBoardGameAsync(boardGame.objectId, newBoardGame);
+        return updateBoardGameAsync(boardGame.objectId, newBoardGame);
       }
 
     } catch (err) {

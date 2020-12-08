@@ -40,6 +40,7 @@ export class AddBoardgameComponent implements OnInit {
   nextClicked: boolean;
   boardGame = new BoardGame();
   fileToUpload: File = null;
+  disableSubmit: boolean = false;
 
   constructor(
     private router: Router,
@@ -79,11 +80,12 @@ export class AddBoardgameComponent implements OnInit {
 
   onSubmit() {
     if (this.allTabsValid()) {
+      this.disableSubmit = true;
       this.mapBoardGame();
-      this.boardgameService.createBoadGame(this.boardGame, this.fileToUpload);
-
-      this.alertify.success('Congrats, your BoardGame was successfully created');
-      this.router.navigate(['/']);
+      this.boardgameService.createBoadGame(this.boardGame, this.fileToUpload).then(() => {
+        this.alertify.success('Congrats, your BoardGame was successfully created');
+        this.router.navigate(['/']);
+      });
     } else {
       this.nextClicked = true;
       this.alertify.error('Please review the form and provide all valid entries');
