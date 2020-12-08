@@ -6,6 +6,7 @@ import { IBoardGame } from '../../models/IBoardGame.interface';
   templateUrl: './boardgame-card.component.html',
   styleUrls: ['./boardgame-card.component.css']
 })
+
 export class BoardgameCardComponent implements OnInit {
   @Input() boardGame : IBoardGame
 
@@ -14,5 +15,4 @@ export class BoardgameCardComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

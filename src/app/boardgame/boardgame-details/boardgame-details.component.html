@@ -13,9 +13,28 @@
       </div>
       <div class="card-footer">
         <div class="btn-group d-flex">
-          <button class="btn btn-primary">Rate game</button>
+          <button class="btn btn-primary" (click)="onRateClicked()">Rate game</button>
           <button *ngIf="isOwner" routerLink="/edit-boardgame/{{boardGamePreview.objectId}}" class="btn btn-success">Edit</button>
           <button *ngIf="isOwner" class="btn btn-danger">Remove from library</button>
+        </div>
+        <div class="form-group col-12" *ngIf="isRateClicked">
+          <form (ngSubmit)='onSubmit()' [formGroup]="addRatingForm">
+
+          <p>Rate this game</p>
+            <div class="btn-group" btnRadioGroup formControlName='Rating'>
+              <label
+              *ngFor="let number of ratingNumbers"
+              role="button" tabindex="0" class="btn btn-outline-primary mr-2"
+              [btnRadio]="number"
+              name="MinPlayers"
+              >{{number}}
+            </label>
+            </div>
+            <!-- <div class="error-block" *ngIf="MinPlayers.invalid && nextClicked">
+              Please select minimum players
+            </div> -->
+            <button type="submit" [disabled]="isRated" class="btn btn-primary mr-2">Submit your Rating</button>
+          </form>
 
         </div>
       </div>

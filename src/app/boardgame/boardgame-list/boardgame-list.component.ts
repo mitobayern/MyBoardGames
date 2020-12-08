@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { BoardGamesService } from 'src/app/services/boardGames.service';
 import { IBoardGame } from '../../models/IBoardGame.interface';
+import { BoardGamesService } from 'src/app/services/boardGames.service';
 
 @Component({
   selector: 'app-boardgame-list',
   templateUrl: './boardgame-list.component.html',
   styleUrls: ['./boardgame-list.component.css'],
 })
+
 export class BoardgameListComponent implements OnInit {
   boardGames: Array<IBoardGame>;
 
@@ -22,6 +23,5 @@ export class BoardgameListComponent implements OnInit {
         console.log(error);
       }
     );
-
   }
 }

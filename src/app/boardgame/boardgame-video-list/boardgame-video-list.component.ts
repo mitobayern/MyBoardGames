@@ -10,8 +10,6 @@ export class BoardgameVideoListComponent implements OnInit {
 
   videos: Array<string> = [];
 
-
-
   constructor(private boardGamesService: BoardGamesService) { }
 
   ngOnInit() {

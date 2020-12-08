@@ -1,19 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { BoardGame } from 'src/app/models/boardGame';
+import { IBoardGame } from '../../models/IBoardGame.interface';
+
 import { Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
-import { BoardGame } from 'src/app/models/boardGame';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { BoardGamesService } from 'src/app/services/boardGames.service';
-import { IBoardGame } from '../../models/IBoardGame.interface';
 
 @Component({
   selector: 'app-add-boardgame',
   templateUrl: './add-boardgame.component.html',
   styleUrls: ['./add-boardgame.component.css'],
 })
+
 export class AddBoardgameComponent implements OnInit {
-  // @ViewChild('Form') createBoardgameForm: NgForm;
   @ViewChild('formTabs') formTabs: TabsetComponent;
 
   boardGamePreview: IBoardGame = {
@@ -61,7 +63,6 @@ export class AddBoardgameComponent implements OnInit {
         MaxPlayers: [null , Validators.required],
         MinPlayingTime: [null , Validators.required],
         MaxPlayingTime: [null , Validators.required],
-        // Rating: [null , Validators.required],
       }),
       VideoTutorial: this.formBuilder.group({
         VideoUrl: [null , Validators.required],
@@ -80,16 +81,13 @@ export class AddBoardgameComponent implements OnInit {
     if (this.allTabsValid()) {
       this.mapBoardGame();
       this.boardgameService.createBoadGame(this.boardGame, this.fileToUpload);
-      console.log(this.addBoardGameForm.value);
 
-      this.alertify.success('Congrats, your property listed successfully on our website');
+      this.alertify.success('Congrats, your BoardGame was successfully created');
       this.router.navigate(['/']);
     } else {
       this.nextClicked = true;
       this.alertify.error('Please review the form and provide all valid entries');
     }
-
-    console.log(this.addBoardGameForm.value);
   }
 
   selectTab(tabId: number, isCurrentTabValid: boolean) {
@@ -148,14 +146,6 @@ export class AddBoardgameComponent implements OnInit {
       };
       reader.readAsDataURL(files.item(0));
   }
-
-  // uploadFileToActivity() {
-  //   this.fileUploadService.saveFile(this.fileToUpload).subscribe(data => {
-  //     // do something, if upload success
-  //     }, error => {
-  //       console.log(error);
-  //     });
-  // }
 
   get BasicInfo() {
     return this.addBoardGameForm.controls.BasicInfo as FormGroup;

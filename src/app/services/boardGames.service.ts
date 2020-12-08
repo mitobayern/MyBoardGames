@@ -4,7 +4,9 @@ import { map } from 'rxjs/operators';
 import { IBoardGame } from '../models/IBoardGame.interface';
 import { Observable, from } from 'rxjs';
 import { BoardGame } from '../models/boardGame';
-import { createBoardGameAsync, getBoardGameByIdAsync, uploadFileAsync, getAllBoardGamesAsync, updateBoardGameAsync } from '../services/webApi.js'
+import { Rating } from '../models/rating';
+
+import { createBoardGameAsync, getBoardGameByIdAsync, uploadFileAsync, getAllBoardGamesAsync, updateBoardGameAsync, rateBoardGameAsync, getAllRatingsAsync } from '../services/webApi.js'
 
 
 @Injectable({
@@ -60,6 +62,22 @@ export class BoardGamesService {
     );
   }
 
+  getGameRatingByOwnerId(gameId): Observable<Rating> {
+    return from(getAllRatingsAsync()).pipe(
+      map((data:any) => {
+        var rating = new Rating();
+        for (const id in data) {
+          if (data.hasOwnProperty(id) && data[id].ownerId === localStorage.getItem('userId') && data[id].GameId === gameId) {
+            rating = data[id];
+          }
+        }
+        console.log(rating);
+
+        return rating;
+      })
+    );
+  }
+
   async createBoadGame(boardGame: BoardGame, fileToUpload: File) {
     try {
       const newBoardGame = {
@@ -88,6 +106,23 @@ export class BoardGamesService {
       alert(err.message);
     }
   }
+
+  async rateBoadGame(rating: Rating) {
+    try {
+      const newRating = {
+        GameId: rating.GameId,
+        Rating: rating.Rating,
+        ownerId: rating.ownerId,
+      }
+
+      rateBoardGameAsync(newRating);
+
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  }
+
 
   async editBoadGame(boardGame: BoardGame, fileToUpload?: File) {
     try {
@@ -143,7 +178,6 @@ export class BoardGamesService {
       })
     );
   }
-
 
 
 

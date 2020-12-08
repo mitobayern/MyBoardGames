@@ -11,6 +11,7 @@ const endpoints = {
   LOGOUT: 'users/logout',
   BOARDGAMES: 'data/boardgames',
   IMAGES_UPLOAD:'files/images',
+  RATINGS: 'data/gameratings'
 };
 
 //REGISTER USER
@@ -73,6 +74,19 @@ export function createBoardGameAsync(boardGame) {
   })).then(resposne => resposne.json());
 }
 
+//CREATE RATING IN DATABASE
+export function rateBoardGameAsync(rating) {
+  const token = localStorage.getItem('userToken');
+  return ( fetch(host(endpoints.RATINGS), {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'user-token': token
+      },
+      body: JSON.stringify(rating)
+  })).then(resposne => resposne.json());
+}
+
 
 //UPLOAD IMAGE FILE IN DATABASE
 export async function uploadFileAsync(fileToUpload) {
@@ -99,6 +113,18 @@ export async function getAllBoardGamesAsync() {
   const token = localStorage.getItem('userToken');
 
   return (await fetch(host(endpoints.BOARDGAMES), {
+      headers: {
+          'Content-Type': 'application/json',
+          'user-token': token
+      }
+  })).json();
+}
+
+//READ ALL RATINGS FROM DATABASE
+export async function getAllRatingsAsync() {
+  const token = localStorage.getItem('userToken');
+
+  return (await fetch(host(endpoints.RATINGS), {
       headers: {
           'Content-Type': 'application/json',
           'user-token': token
