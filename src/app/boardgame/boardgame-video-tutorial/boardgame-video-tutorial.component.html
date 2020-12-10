@@ -1,0 +1,6 @@
+<div class="card">
+  <h1>Learn how to play {{gameTitle}}</h1>
+  <div class="player" *ngIf="videoUrl">
+    <youtube-player class="wrapper" width="800" height="450" [videoId]="videoUrl"></youtube-player>
+  </div>
+</div>

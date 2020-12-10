@@ -1,0 +1,20 @@
+.player {
+  margin: 80px auto;
+  border: 2px solid #f8ffb091;
+  display: flex;
+}
+
+.card {
+background: none;
+display: flex;
+}
+
+h1 {
+  margin-top: 50px;
+  color: white;
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+}

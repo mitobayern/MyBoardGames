@@ -1,0 +1,7 @@
+.wrapper {
+  display: flex;
+}
+
+.player {
+  border: 2px solid #f8ffb091;
+ }

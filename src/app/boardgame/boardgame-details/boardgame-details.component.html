@@ -1,18 +1,17 @@
 <div class="row shadow">
-  <div class="col-sm-4 p-0">
+  <div class="col-sm-4 p-2">
     <div class="card">
       <div class="card-img-wrapper">
         <img class="card-img-top" src="{{boardGamePreview.Image}}">
       </div>
+
       <div class="card-body">
         <div>
-            <h5>{{boardGamePreview.Title}}</h5>
-            <h5>Rating: {{averageRating}}</h5>
-
+            <h5 class="game-title">{{boardGamePreview.Title}}</h5>
+            <h5 class="game-rating">Game rating: {{averageRating}}</h5>
         </div>
-
-
       </div>
+
       <div class="card-footer">
         <div class="btn-group d-flex">
           <button class="btn btn-primary mr-2" (click)="onRateClicked()">Rate game</button>
@@ -20,76 +19,62 @@
           <button *ngIf="isOwner && !boardGamePreview.OnSale" class="btn btn-danger" (click)="onSaleClicked()">List for sale</button>
           <button *ngIf="isOwner && boardGamePreview.OnSale" class="btn btn-dark" (click)="onSaleClicked()">Not for sale</button>
         </div>
+
         <div class="form-group col-12" *ngIf="isRateClicked">
           <form (ngSubmit)='onSubmit()' [formGroup]="addRatingForm" class="text-center">
-          <div *ngIf="isRated">
-            <br>
-            <h6>Your have already rated this game with: {{currentRating.Rating}}</h6>
-            <br>
-          </div>
-            <div class="btn-group my-2 text-center mx-auto w-100" btnRadioGroup formControlName='Rating'>
-              <label
-              *ngFor="let number of ratingNumbers"
-              role="button" tabindex="0" class="btn btn-outline-primary px-2"
-              [btnRadio]="number"
-              name="MinPlayers"
-              >{{number}}
-            </label>
+            <div *ngIf="isRated">
+              <h6 class="already-rated">Your have already rated this game with: {{currentRating.Rating}}</h6>
             </div>
-            <button type="submit" class="btn btn-success" [disabled]="disableSubmit">Submit your Rating</button>
+              <div class="btn-group my-2 text-center mx-auto w-100" btnRadioGroup formControlName='Rating'>
+                <label
+                *ngFor="let number of ratingNumbers"
+                role="button" tabindex="0" class="btn btn-outline-primary px-2 mt-2"
+                [btnRadio]="number"
+                name="MinPlayers"
+                >{{number}}
+              </label>
+              </div>
+              <button type="submit" class="btn btn-success" [disabled]="disableSubmit">Submit your Rating</button>
           </form>
-
         </div>
       </div>
+    </div>
   </div>
-  </div>
-  <div class="col-sm-8 p-0">
+
+  <div class="col-sm-8 p-2">
     <div class="tab-panel">
       <tabset class="member-tabset">
         <tab heading="Overview">
-          <h1>Overview</h1>
-          <div class="row">
-              <div class="col-sm-6">
-                  <div class="heading">
-                      <strong>Project Name</strong>
-                      <!-- <p>{{property.Name}}</p> -->
-                  </div>
-
-                  <div class="heading">
-                      <strong>Floor Number</strong>
-                      <!-- <p>{{property.FloorNo}}</p> -->
-                  </div>
-
-                  <div class="heading">
-                      <strong>Age of Property</strong>
-                      <!-- <p>{{property.AOP}}</p> -->
-                  </div>
-
-                  <div class="heading">
-                      <strong>Posession</strong>
-                      <!-- <p>{{property.Possession}}</p> -->
-                  </div>
-              </div>
-
-
+          <h1 class="game-details">Game details</h1>
               <div class="col-sm-12">
-                  <div class="heading">
-                      <strong>About Property</strong>
-                      <!-- <p>{{property.Description}}</p> -->
+                <div class="details-heading">
+                  <h5>Publisher</h5>
+                  <p>{{boardGamePreview.Publisher}}</p>
+                 </div>
+
+                 <div class="details-heading">
+                  <h5>Designer</h5>
+                  <p>{{boardGamePreview.Designer}}</p>
+                 </div>
+
+                 <div class="details-heading">
+                  <h5>Playing time</h5>
+                      <p>{{boardGamePreview.MinPlayingTime}} - {{boardGamePreview.MaxPlayingTime}} minutes</p>
+                  </div>
+
+                  <div class="details-heading">
+                      <h5>Players</h5>
+                      <p>{{boardGamePreview.MinPlayers}} - {{boardGamePreview.MaxPlayers}}</p>
                   </div>
               </div>
-            </div>
         </tab>
         <tab heading="Video Tutorial">
-          <div class="col-sm-12" *ngIf="boardGamePreview.VideoUrl">
-
-            <youtube-player [videoId]="boardGamePreview.VideoUrl" (ready)="savePlayer($event)"
-            (change)="onStateChange($event)"></youtube-player>
-        </div>
-
-        </tab>
-        <tab heading="Photos">
-          <h1>Photos</h1>
+          <div class="col-sm-12 player-wrapper" *ngIf="boardGamePreview.VideoUrl">
+            <div class="player">
+              <youtube-player class="wrapper" width="740" height="485" [videoId]="boardGamePreview.VideoUrl" (ready)="savePlayer($event)"
+              (change)="onStateChange($event)"></youtube-player>
+            </div>
+          </div>
         </tab>
       </tabset>
     </div>

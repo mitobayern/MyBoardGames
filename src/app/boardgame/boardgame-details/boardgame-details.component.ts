@@ -135,7 +135,9 @@ export class BoardgameDetailsComponent implements OnInit {
       );
 
     } else {
-      this.boardGamesService.rateBoadGame(this.rating);
+      this.boardGamesService.rateBoadGame(this.rating).then(() => {
+        this.router.navigate(['/']);
+      });
       this.alertify.success(`You have succesfuly rated this game with ${this.rating.Rating}`);
     }
   }

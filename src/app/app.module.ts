@@ -29,6 +29,7 @@ import { BoardGamesService } from './services/boardGames.service';
 import { BoardgameVideoListComponent } from './boardgame/boardgame-video-list/boardgame-video-list.component';
 import { BoardgamePersonalLibraryComponent } from './boardgame/boardgame-personal-library/boardgame-personal-library.component';
 import { EditBoardgameComponent } from './boardgame/edit-boardgame/edit-boardgame.component';
+import { BoardgameVideoTutorialComponent } from './boardgame/boardgame-video-tutorial/boardgame-video-tutorial.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', component: BoardgamePersonalLibraryComponent },
@@ -40,6 +41,8 @@ const appRoutes: Routes = [
   { path: 'marketplace', component: BoardgameSalesListComponent },
   { path: 'boardgame-details/:id', component: BoardgameDetailsComponent },
   { path: 'edit-boardgame/:id', component: EditBoardgameComponent },
+  { path: 'video-tutorials/:id', component: BoardgameVideoTutorialComponent },
+
 
 ];
 
@@ -58,6 +61,7 @@ Backendless.initApp("5BDFCD08-36D1-D8FE-FF9E-B312ECB3DC00","FE43AA78-FFB9-45F2-B
     BoardgameDetailsComponent,
     BoardgameSalesListComponent,
     BoardgameVideoListComponent,
+    BoardgameVideoTutorialComponent,
     BoardgamePersonalLibraryComponent,
   ],
   imports: [
@@ -76,7 +80,6 @@ Backendless.initApp("5BDFCD08-36D1-D8FE-FF9E-B312ECB3DC00","FE43AA78-FFB9-45F2-B
     UserService,
     AlertifyService,
     BoardGamesService,
-
   ],
   bootstrap: [AppComponent],
 })

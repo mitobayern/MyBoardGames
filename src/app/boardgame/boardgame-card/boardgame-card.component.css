@@ -1,6 +1,7 @@
 .boardGameImage {
   max-height: 350px;
   width: auto;
+  max-width: 100%;
 }
 
 .boardGameTitle {
@@ -28,7 +29,7 @@
   overflow: hidden;
   position: relative;
   text-align: center;
-  background: #05182ecf;
+  background: linear-gradient(135deg, rgb(5 21 47 / 70%) 100%, rgba(24,13,77,1) 100%);
 }
 
 .imgage-icons {
@@ -56,7 +57,7 @@
 }
 
 .card-body {
-  background: linear-gradient(135deg, rgb(5 21 47 / 50%) 100%, rgba(24,13,77,1) 100%);
+  background: linear-gradient(135deg, rgb(5 21 47 / 70%) 100%, rgba(24,13,77,1) 100%);
   min-height: 220px;
 }
 
