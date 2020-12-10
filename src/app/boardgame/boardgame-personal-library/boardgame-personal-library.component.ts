@@ -13,8 +13,9 @@ export class BoardgamePersonalLibraryComponent implements OnInit {
 
   constructor(private boardGamesService: BoardGamesService) {}
 
+
   ngOnInit(): void {
-    this.boardGamesService.getAllBoardGamesByOwner().subscribe(
+        this.boardGamesService.getAllBoardGamesByOwner().subscribe(
       (data) => {
         this.boardGames = data;
       },
@@ -23,5 +24,9 @@ export class BoardgamePersonalLibraryComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  isLoggedIn() {
+    return localStorage.getItem('userName');
   }
 }

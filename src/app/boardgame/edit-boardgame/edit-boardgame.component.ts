@@ -23,7 +23,7 @@ export class EditBoardgameComponent implements OnInit {
   nextClicked: boolean;
   fileToUpload: File = null;
   boardGame = new BoardGame();
-  addBoardGameForm: FormGroup;
+  editBoardGameForm: FormGroup;
   players: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   minutes: Array<number> = [30, 45, 60, 90, 120, 180, 240, 360, 480];
   disableSubmit: boolean = false;
@@ -53,7 +53,7 @@ export class EditBoardgameComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.CreateAddBoardGameForm();
+    this.EditBoardGameForm();
     this.boardGameId = this.route.snapshot.params['id'];
     this.boardgameService.gameDetails(this.boardGameId)
       .then( data => {
@@ -79,8 +79,8 @@ export class EditBoardgameComponent implements OnInit {
     return this.boardGamePreview.ownerId === localStorage.getItem('userId') ? true : false;
   }
 
-  CreateAddBoardGameForm() {
-    this.addBoardGameForm = this.formBuilder.group({
+  EditBoardGameForm() {
+    this.editBoardGameForm = this.formBuilder.group({
       BasicInfo: this.formBuilder.group({
         Title: [null , Validators.required],
         Publisher: [null , Validators.required],
@@ -178,19 +178,19 @@ export class EditBoardgameComponent implements OnInit {
   }
 
   get BasicInfo() {
-    return this.addBoardGameForm.controls.BasicInfo as FormGroup;
+    return this.editBoardGameForm.controls.BasicInfo as FormGroup;
   }
 
   get GameDetails(){
-    return this.addBoardGameForm.controls.GameDetails as FormGroup;
+    return this.editBoardGameForm.controls.GameDetails as FormGroup;
   }
 
   get VideoTutorial(){
-    return this.addBoardGameForm.controls.VideoTutorial as FormGroup;
+    return this.editBoardGameForm.controls.VideoTutorial as FormGroup;
   }
 
   get GamePhotos(){
-    return this.addBoardGameForm.controls.GamePhotos as FormGroup;
+    return this.editBoardGameForm.controls.GamePhotos as FormGroup;
   }
 
   get Title(){

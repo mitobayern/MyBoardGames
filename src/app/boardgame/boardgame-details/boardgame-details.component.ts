@@ -118,41 +118,56 @@ export class BoardgameDetailsComponent implements OnInit {
     this.mapRating();
     if(this.isRated){
       this.rating.objectId = this.currentRating.objectId
-      this.boardGamesService.updateRating(this.rating);
-      this.alertify.success(`You have succesfuly updated your rating to ${this.rating.Rating}`);
+      this.boardGamesService.updateRating(this.rating).then(()=>{
+        this.alertify.success(`You have succesfuly updated your rating to ${this.rating.Rating}`);
+        this.boardGamesService.getAverageGameRatingByGameId(this.boardGameId).subscribe(
+          (data) => {
+            this.boardGamePreview.Rating = data;
+            this.boardGamesService.editBoadGame(this.boardGamePreview).then(() => {
+              this.router.navigate(['ranking']);
+            });
+          },
+          (error) => {
+            console.log('httperror: ');
+            console.log(error);
+          }
+        );
+      });
 
-      this.boardGamesService.getAverageGameRatingByGameId(this.boardGameId).subscribe(
-        (data) => {
-          this.boardGamePreview.Rating = data;
-          this.boardGamesService.editBoadGame(this.boardGamePreview).then(() => {
-            this.router.navigate(['/']);
-          });
-        },
-        (error) => {
-          console.log('httperror: ');
-          console.log(error);
-        }
-      );
 
     } else {
       this.boardGamesService.rateBoadGame(this.rating).then(() => {
-        this.router.navigate(['/']);
+        this.boardGamesService.getAverageGameRatingByGameId(this.boardGameId).subscribe(
+          (data) => {
+            this.boardGamePreview.Rating = data;
+            this.boardGamesService.editBoadGame(this.boardGamePreview).then(() => {
+              this.router.navigate(['ranking']);
+            });
+          },
+          (error) => {
+            console.log('httperror: ');
+            console.log(error);
+          }
+        );
+        this.alertify.success(`You have succesfuly rated this game with ${this.rating.Rating}`);
+        this.router.navigate(['ranking']);
       });
-      this.alertify.success(`You have succesfuly rated this game with ${this.rating.Rating}`);
     }
   }
 
   onSaleClicked(){
     if(!this.boardGamePreview.OnSale) {
       this.boardGamePreview.OnSale = true;
-      this.boardGamesService.editBoadGame(this.boardGamePreview);
-      this.alertify.success(`You have succesfuly listed your game for sale`);
-      this.router.navigate(['/marketplace']);
+      this.boardGamesService.editBoadGame(this.boardGamePreview).then(()=>{
+        this.alertify.success(`You have succesfuly listed your game for sale`);
+        this.router.navigate(['/marketplace']);
+      });
     } else {
       this.boardGamePreview.OnSale = false;
-      this.boardGamesService.editBoadGame(this.boardGamePreview);
-      this.alertify.success(`You have succesfuly removed your game from market`);
-      this.router.navigate(['/']);
+      this.boardGamesService.editBoadGame(this.boardGamePreview).then(()=>{
+        this.alertify.success(`You have succesfuly removed your game from market`);
+        this.router.navigate(['/']);
+      });
     }
   }
 

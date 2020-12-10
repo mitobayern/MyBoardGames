@@ -11,8 +11,6 @@ import { FormsModule } from '@angular/forms'
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import Backendless from 'backendless';
 
-
-
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { UserLoginComponent } from './user/user-login/user-login/user-login.component';
@@ -30,6 +28,7 @@ import { BoardgameVideoListComponent } from './boardgame/boardgame-video-list/bo
 import { BoardgamePersonalLibraryComponent } from './boardgame/boardgame-personal-library/boardgame-personal-library.component';
 import { EditBoardgameComponent } from './boardgame/edit-boardgame/edit-boardgame.component';
 import { BoardgameVideoTutorialComponent } from './boardgame/boardgame-video-tutorial/boardgame-video-tutorial.component';
+import { ErrorPageComponent } from './Error-page/error-page/error-page.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', component: BoardgamePersonalLibraryComponent },
@@ -42,6 +41,8 @@ const appRoutes: Routes = [
   { path: 'boardgame-details/:id', component: BoardgameDetailsComponent },
   { path: 'edit-boardgame/:id', component: EditBoardgameComponent },
   { path: 'video-tutorials/:id', component: BoardgameVideoTutorialComponent },
+  { path: '**', component: ErrorPageComponent },
+
 
 
 ];
@@ -52,6 +53,7 @@ Backendless.initApp("5BDFCD08-36D1-D8FE-FF9E-B312ECB3DC00","FE43AA78-FFB9-45F2-B
   declarations: [
     AppComponent,
     NavBarComponent,
+    ErrorPageComponent,
     UserLoginComponent,
     UserRegisterComponent,
     AddBoardgameComponent,

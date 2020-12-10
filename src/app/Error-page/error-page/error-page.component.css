@@ -1,0 +1,31 @@
+.container {
+  margin: 40vh auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.text-strikethrough{
+  text-decoration-line: line-through;
+  color: #fcf099;
+}
+
+.text-container{
+  margin-top: 30px;
+}
+
+.text-container h4 {
+  font-weight: 400;
+  font-size: 40px;
+}
+
+.page-text {
+  padding-left: 10px;
+}
+
+.error-text{
+  font-size: 50px;
+  font-weight: 400;
+}
+

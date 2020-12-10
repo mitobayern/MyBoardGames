@@ -55,7 +55,8 @@ export class UserService {
         localStorage.removeItem('userName');
         localStorage.removeItem('userToken');
 
-        this.router.navigate(['/']);
+        return result;
+
       } catch (err) {
         console.error(err);
         alert(err.message);

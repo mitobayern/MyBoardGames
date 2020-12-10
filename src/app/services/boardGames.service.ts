@@ -152,7 +152,7 @@ export class BoardGamesService {
         objectId: rating.objectId
       }
 
-      updateRatingAsync(newRating.objectId, newRating);
+      return updateRatingAsync(newRating.objectId, newRating);
 
     } catch (err) {
       console.error(err);
