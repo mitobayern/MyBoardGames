@@ -29,22 +29,20 @@ import { BoardgamePersonalLibraryComponent } from './boardgame/boardgame-persona
 import { EditBoardgameComponent } from './boardgame/edit-boardgame/edit-boardgame.component';
 import { BoardgameVideoTutorialComponent } from './boardgame/boardgame-video-tutorial/boardgame-video-tutorial.component';
 import { ErrorPageComponent } from './Error-page/error-page/error-page.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
-  { path: '', pathMatch: 'full', component: BoardgamePersonalLibraryComponent },
-  { path: 'user/login', component: UserLoginComponent },
-  { path: 'ranking', component: BoardgameListComponent },
-  { path: 'add-boardgame', component: AddBoardgameComponent },
-  { path: 'user/register', component: UserRegisterComponent },
-  { path: 'video-tutorials', component: BoardgameVideoListComponent },
-  { path: 'marketplace', component: BoardgameSalesListComponent },
-  { path: 'boardgame-details/:id', component: BoardgameDetailsComponent },
-  { path: 'edit-boardgame/:id', component: EditBoardgameComponent },
-  { path: 'video-tutorials/:id', component: BoardgameVideoTutorialComponent },
   { path: '**', component: ErrorPageComponent },
-
-
-
+  { path: '', pathMatch: 'full', component: BoardgamePersonalLibraryComponent },
+  { path: 'user/login', canActivate:[AuthGuard], component: UserLoginComponent, data: { isLogged: false} },
+  { path: 'ranking', canActivate:[AuthGuard], component: BoardgameListComponent, data: { isLogged: true} },
+  { path: 'add-boardgame', canActivate:[AuthGuard], component: AddBoardgameComponent, data: { isLogged: true} },
+  { path: 'user/register', canActivate:[AuthGuard], component: UserRegisterComponent, data: { isLogged: false} },
+  { path: 'video-tutorials', canActivate:[AuthGuard], component: BoardgameVideoListComponent, data: { isLogged: true} },
+  { path: 'marketplace', canActivate:[AuthGuard], component: BoardgameSalesListComponent, data: { isLogged: true} },
+  { path: 'boardgame-details/:id', canActivate:[AuthGuard], component: BoardgameDetailsComponent, data: { isLogged: true} },
+  { path: 'edit-boardgame/:id', canActivate:[AuthGuard], component: EditBoardgameComponent, data: { isLogged: true} },
+  { path: 'video-tutorials/:id', canActivate:[AuthGuard], component: BoardgameVideoTutorialComponent, data: { isLogged: true} },
 ];
 
 Backendless.initApp("5BDFCD08-36D1-D8FE-FF9E-B312ECB3DC00","FE43AA78-FFB9-45F2-B43A-298ECFA60BA9");
@@ -82,6 +80,7 @@ Backendless.initApp("5BDFCD08-36D1-D8FE-FF9E-B312ECB3DC00","FE43AA78-FFB9-45F2-B
     UserService,
     AlertifyService,
     BoardGamesService,
+    AuthGuard
   ],
   bootstrap: [AppComponent],
 })
