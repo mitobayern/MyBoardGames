@@ -9,6 +9,8 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms'
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
+import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
+
 import Backendless from 'backendless';
 
 import { AppComponent } from './app.component';
@@ -76,6 +78,8 @@ Backendless.initApp("5BDFCD08-36D1-D8FE-FF9E-B312ECB3DC00","FE43AA78-FFB9-45F2-B
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
     NgxYoutubePlayerModule.forRoot(),
+    NgxUiLoaderModule.forRoot({minTime:3000}),
+    NgxUiLoaderRouterModule
   ],
   providers: [
     UserService,
