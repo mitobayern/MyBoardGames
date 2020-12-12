@@ -112,7 +112,7 @@ export async function getBoardGameByIdAsync(id) {
 export async function getAllBoardGamesAsync() {
   const token = localStorage.getItem('userToken');
 
-  return (await fetch(host(endpoints.BOARDGAMES), {
+  return (await fetch(host(endpoints.BOARDGAMES + `?sortBy=Rating%20desc`), {
       headers: {
           'Content-Type': 'application/json',
           'user-token': token
