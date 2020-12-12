@@ -71,7 +71,6 @@ export class BoardGamesService {
             rating = data[id];
           }
         }
-
         return rating;
       })
     );
@@ -94,8 +93,6 @@ export class BoardGamesService {
       })
     );
   }
-
-
 
   createBoadGame(boardGame: BoardGame, fileToUpload: File) {
     try {
@@ -157,8 +154,6 @@ export class BoardGamesService {
       alert(err.message);
     }
   }
-
-
 
   editBoadGame(boardGame: BoardGame, fileToUpload?: File) {
     try {

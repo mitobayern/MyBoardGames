@@ -156,7 +156,6 @@ export async function updateRatingAsync(id, rating) {
   })).json();
 }
 
-
 //DELETE OBJECT FROM DATABASE BY GIVEN ID
 export async function deleteBoardGameAsync(id) {
   const token = localStorage.getItem('userToken');
