@@ -32,7 +32,6 @@ import { ErrorPageComponent } from './Error-page/error-page/error-page.component
 import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
-  { path: '**', component: ErrorPageComponent },
   { path: '', pathMatch: 'full', component: BoardgamePersonalLibraryComponent },
   { path: 'user/login', canActivate:[AuthGuard], component: UserLoginComponent, data: { isLogged: false} },
   { path: 'ranking', canActivate:[AuthGuard], component: BoardgameListComponent, data: { isLogged: true} },
@@ -43,6 +42,8 @@ const appRoutes: Routes = [
   { path: 'boardgame-details/:id', canActivate:[AuthGuard], component: BoardgameDetailsComponent, data: { isLogged: true} },
   { path: 'edit-boardgame/:id', canActivate:[AuthGuard], component: EditBoardgameComponent, data: { isLogged: true} },
   { path: 'video-tutorials/:id', canActivate:[AuthGuard], component: BoardgameVideoTutorialComponent, data: { isLogged: true} },
+  { path: '**', component: ErrorPageComponent },
+
 ];
 
 Backendless.initApp("5BDFCD08-36D1-D8FE-FF9E-B312ECB3DC00","FE43AA78-FFB9-45F2-B43A-298ECFA60BA9");

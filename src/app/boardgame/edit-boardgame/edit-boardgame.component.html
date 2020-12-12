@@ -42,9 +42,14 @@
                   </div>
                 </div>
 
-                <div class="form-group col-12">
-                  <button type="button" class="btn btn-primary mr-2" (click)="onBack()">Back</button>
-                  <button type="button" class="btn btn-primary mr-2" (click)="selectTab(1, BasicInfo.valid)">Next</button>
+                <div class="form-group col-12 buttons-container">
+                  <div class="buttons-navigation">
+                    <button type="button" class="btn btn-primary mr-2" (click)="selectTab(1, BasicInfo.valid)">Next</button>
+                  </div>
+                  <div class="submit-btn">
+                    <button type="submit" class="btn btn-success mr-2" [disabled]="disableSubmit">Save</button>
+                    <button type="button" class="btn btn-dark mr-2" (click)="onBack()">Cancel</button>
+                  </div>
                 </div>
               </tab>
 
@@ -119,9 +124,15 @@
                       </div>
                 </div>
 
-                <div class="form-group col-12">
-                  <button type="button" class="btn btn-primary mr-2" (click)="selectTab(0, BasicInfo.valid)">Previous</button>
-                  <button type="button" class="btn btn-primary mr-2" (click)="selectTab(2, BasicInfo.valid)">Next</button>
+                <div class="form-group col-12 buttons-container">
+                  <div class="buttons-navigation">
+                    <button type="button" class="btn btn-primary mr-2" (click)="selectTab(0, BasicInfo.valid)">Previous</button>
+                    <button type="button" class="btn btn-primary mr-2" (click)="selectTab(2, BasicInfo.valid)">Next</button>
+                  </div>
+                  <div class="submit-btn">
+                    <button type="submit" class="btn btn-success mr-2" [disabled]="disableSubmit">Save</button>
+                    <button type="button" class="btn btn-dark mr-2" (click)="onBack()">Cancel</button>
+                  </div>
                 </div>
               </tab>
 
@@ -137,9 +148,15 @@
                   </div>
                 </div>
 
-                <div class="form-group col-12">
-                  <button type="button" class="btn btn-primary mr-2" (click)="selectTab(1, BasicInfo.valid)">Previous</button>
-                  <button type="button" class="btn btn-primary mr-2" (click)="selectTab(3, BasicInfo.valid)">Next</button>
+                <div class="form-group col-12 buttons-container">
+                  <div class="buttons-navigation">
+                    <button type="button" class="btn btn-primary mr-2" (click)="selectTab(1, BasicInfo.valid)">Previous</button>
+                    <button type="button" class="btn btn-primary mr-2" (click)="selectTab(3, BasicInfo.valid)">Next</button>
+                  </div>
+                  <div class="submit-btn">
+                    <button type="submit" class="btn btn-success mr-2" [disabled]="disableSubmit">Save</button>
+                    <button type="button" class="btn btn-dark mr-2" (click)="onBack()">Cancel</button>
+                  </div>
                 </div>
               </tab>
 
@@ -152,10 +169,14 @@
                   </div>
                 </div>
 
-                <div class="form-group col-12">
-                  <button type="button" class="btn btn-primary mr-2" (click)="selectTab(2, BasicInfo.valid)">Previous</button>
-                  <button type="submit" class="btn btn-primary mr-2" [disabled]="disableSubmit">Save</button>
-                  <button type="reset" class="btn btn-primary mr-2">Cancel</button>
+                <div class="form-group col-12 buttons-container">
+                  <div class="buttons-navigation">
+                    <button type="button" class="btn btn-primary mr-2" (click)="selectTab(2, BasicInfo.valid)">Previous</button>
+                  </div>
+                  <div class="submit-btn">
+                    <button type="submit" class="btn btn-success mr-2" [disabled]="disableSubmit">Save</button>
+                    <button type="reset" class="btn btn-dark mr-2" (click)="onBack()">Cancel</button>
+                  </div>
                 </div>
               </tab>
             </tabset>

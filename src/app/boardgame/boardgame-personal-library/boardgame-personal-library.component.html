@@ -1,9 +1,13 @@
-<div *ngIf="isLoggedIn()" class="row">
-  <div *ngFor="let boardGame of boardGames"  class="shadow-lg col-sm-4 p-3">
-    <app-boardgame-card [boardGame]="boardGame"></app-boardgame-card>
+<div *ngIf="isLoggedIn()">
+  <h1 class="title">My personal boardgames library</h1>
+  <div  class="row">
+    <div *ngFor="let boardGame of boardGames"  class="shadow-lg col-sm-4 p-3">
+      <app-boardgame-card [boardGame]="boardGame"></app-boardgame-card>
+    </div>
   </div>
 </div>
-<div class="container">
+
+<div *ngIf="!isLoggedIn()" class="container">
   <h1 class="heading">Welcome to My Boardgames</h1>
  <p> Click <button routerLink="user/login">here</button> to login to your boardgames library</p>
  <p> Dont have an account? Register <button routerLink="user/register">here</button></p>

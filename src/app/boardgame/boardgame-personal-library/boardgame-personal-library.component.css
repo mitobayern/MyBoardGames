@@ -1,5 +1,13 @@
 .container {
   color: white;
   margin: 40vh auto;
+}
 
+.row{
+  justify-content: center;
+}
+
+.title {
+  color: white;
+  text-align: center;
 }

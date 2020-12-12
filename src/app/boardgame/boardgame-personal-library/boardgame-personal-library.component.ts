@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { BoardGamesService } from 'src/app/services/boardGames.service';
 import { IBoardGame } from '../../models/IBoardGame.interface';
@@ -11,7 +12,7 @@ export class BoardgamePersonalLibraryComponent implements OnInit {
 
   boardGames: Array<IBoardGame>;
 
-  constructor(private boardGamesService: BoardGamesService) {}
+  constructor(private boardGamesService: BoardGamesService, private http:HttpClient) {}
 
 
   ngOnInit(): void {
@@ -30,3 +31,4 @@ export class BoardgamePersonalLibraryComponent implements OnInit {
     return localStorage.getItem('userName');
   }
 }
+

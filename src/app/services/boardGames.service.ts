@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { IBoardGame } from '../models/IBoardGame.interface';
 import { Observable, from } from 'rxjs';
@@ -15,7 +14,7 @@ import { createBoardGameAsync, getBoardGameByIdAsync, uploadFileAsync, getAllBoa
 export class BoardGamesService {
   boardGamesArray: IBoardGame;
 
-  constructor(private httpp: HttpClient) {}
+  constructor() {}
 
   getAllBoardGames():Observable<IBoardGame[]>  {
     return from(getAllBoardGamesAsync()).pipe(
@@ -215,7 +214,6 @@ export class BoardGamesService {
       })
     );
   }
-
 
 
   validateResult(result) {
