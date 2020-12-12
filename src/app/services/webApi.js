@@ -1,8 +1,7 @@
-export function host(endpoint) {
-  const appId = '5BDFCD08-36D1-D8FE-FF9E-B312ECB3DC00';
-  const restApiKey = '70EBAFD8-2834-4916-B7E2-A2212A7498FE';
+import {environment} from '../../environments/environment.ts'
 
-  return `https://api.backendless.com/${appId}/${restApiKey}/${endpoint}`;
+export function host(endpoint) {
+  return `https://api.backendless.com/${environment.backendless.appId}/${environment.backendless.restApiKey}/${endpoint}`;
 }
 
 const endpoints = {
@@ -30,7 +29,6 @@ export async function registerAsync(email, password, userName, mobile) {
   })).json()
 }
 
-
 //LOGIN USER WITH EMAIL
 export async function loginAsync(email, password) {
   const result = await (await fetch(host(endpoints.LOGIN), {
@@ -47,7 +45,6 @@ export async function loginAsync(email, password) {
   return result;
 }
 
-
 //LOGOUT USER
 export async function logoutAsync() {
   const token = localStorage.getItem('userToken');
@@ -59,7 +56,6 @@ export async function logoutAsync() {
       }
   });
 }
-
 
 //CREATE BOARDGAME IN DATABASE
 export function createBoardGameAsync(boardGame) {
@@ -173,23 +169,3 @@ export async function deleteBoardGameAsync(id) {
       }
   })).json();
 }
-
-
-// export const handleFileSelect = event => {
-//   const { files } = event.target // FileList object
-
-//   for (let file of files) {
-//     Backendless.Files.upload(file, '/myFiles')
-//       .then(onSuccess, onError)
-//   }
-// }
-
-// export const onSuccess = file => {
-//   console.log('Uploaded file URL - ' + file.fileURL)
-// }
-
-// export const onError = error => {
-//   console.error('Server reported an error: ', error.message)
-//   console.error('error code: ', error.code)
-//   console.error('http status: ', error.status)
-// }

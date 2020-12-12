@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms'
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
+import {environment} from '../environments/environment'
+
 
 import Backendless from 'backendless';
 
@@ -48,7 +50,7 @@ const appRoutes: Routes = [
 
 ];
 
-Backendless.initApp("5BDFCD08-36D1-D8FE-FF9E-B312ECB3DC00","FE43AA78-FFB9-45F2-B43A-298ECFA60BA9");
+Backendless.initApp(environment.backendless.appId,environment.backendless.JSAPIkey);
 
 @NgModule({
   declarations: [
@@ -78,7 +80,7 @@ Backendless.initApp("5BDFCD08-36D1-D8FE-FF9E-B312ECB3DC00","FE43AA78-FFB9-45F2-B
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
     NgxYoutubePlayerModule.forRoot(),
-    NgxUiLoaderModule.forRoot({minTime:3000}),
+    NgxUiLoaderModule.forRoot({minTime:2000}),
     NgxUiLoaderRouterModule
   ],
   providers: [

@@ -22,7 +22,6 @@ export class BoardgameVideoListComponent implements OnInit {
         console.log(error);
       }
     );
-    console.log(this.videos);
   }
 
 }

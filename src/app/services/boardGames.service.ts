@@ -65,13 +65,12 @@ export class BoardGamesService {
   getGameRatingByOwnerId(gameId): Observable<Rating> {
     return from(getAllRatingsAsync()).pipe(
       map((data:any) => {
-        var rating = new Rating();
+        let rating = new Rating();
         for (const id in data) {
           if (data.hasOwnProperty(id) && data[id].ownerId === localStorage.getItem('userId') && data[id].GameId === gameId) {
             rating = data[id];
           }
         }
-        console.log(rating);
 
         return rating;
       })
@@ -81,8 +80,8 @@ export class BoardGamesService {
   getAverageGameRatingByGameId(gameId): Observable<number> {
     return from(getAllRatingsAsync()).pipe(
       map((data:any) => {
-        var rating: number = 0;
-        var counter: number = 0;
+        let rating: number = 0;
+        let counter: number = 0;
         for (const id in data) {
           if (data.hasOwnProperty(id) && data[id].GameId === gameId) {
             rating += +(data[id].Rating);
